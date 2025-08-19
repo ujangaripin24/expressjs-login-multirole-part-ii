@@ -1,0 +1,27 @@
+{
+  "name": "expressjs-login-multirole-part-ii",
+  "version": "0.0.0",
+  "private": true,
+  "main": "www.js",
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "build": "babel bin -d dist"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^17.2.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/node": "^7.28.0",
+    "@babel/preset-env": "^7.28.3",
+    "nodemon": "^3.1.10"
+  }
+}
