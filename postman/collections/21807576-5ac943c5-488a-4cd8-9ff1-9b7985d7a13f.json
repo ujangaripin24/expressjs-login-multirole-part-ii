@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "21807576-5ac943c5-488a-4cd8-9ff1-9b7985d7a13f",
+		"name": "expressjs-login-multirole-part-ii",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[user] post new user ",
+			"id": "21807576-6ce66865-6140-4515-820c-520556512c02",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/users/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"users",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[user] get all user ",
+			"id": "21807576-2f5dda8a-353e-464a-bf11-87c3e5b73563",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/users/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"users",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
