@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
+import './config/database.js'
 import * as path from "node:path";
 
 const app = express();
