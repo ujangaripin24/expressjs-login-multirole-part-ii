@@ -10,6 +10,8 @@
   "type": "module",
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "argon2": "^0.44.0",
+    "connect-session-sequelize": "^7.1.7",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^17.2.1",
