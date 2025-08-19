@@ -60,7 +60,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/users/get-all",
+					"raw": "http://localhost:52333/api/v1/web/users/get-all?search=user003&page=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -72,6 +72,16 @@
 						"web",
 						"users",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "user003"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						}
 					]
 				}
 			},
