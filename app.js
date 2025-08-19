@@ -4,6 +4,7 @@ import {dirname} from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { fileURLToPath } from 'url';
+import './config/database.js'
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
