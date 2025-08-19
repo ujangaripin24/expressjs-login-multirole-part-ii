@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n    \"name\": \"user005\",\n    \"email\": \"user005@gmail.com\",\n    \"password\": \"123456789\",\n    \"confPassword\": \"123321231\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,6 +72,188 @@
 						"web",
 						"users",
 						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[user] update user by uuid",
+			"id": "21807576-a25b9c85-fa5e-4ab1-bfc7-db509dd29084",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user002(update)\",\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/users/update/3098e7f2-d444-4c46-9c1e-f6dd1a2324d1d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"users",
+						"update",
+						"3098e7f2-d444-4c46-9c1e-f6dd1a2324d1d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[user] get user by id",
+			"id": "21807576-5eb477d2-66e2-4f51-9a7b-f5c48e2bdb7e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/users/detail/3098e7f2-d444-4c46-9c1e-f6dd1a2324d1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"users",
+						"detail",
+						"3098e7f2-d444-4c46-9c1e-f6dd1a2324d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] post user login",
+			"id": "21807576-09f5677c-4eef-44ea-8325-db6f9cea4b86",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] get user profile",
+			"id": "21807576-b660df27-2a7b-444e-a866-54ab85c6d182",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/auth/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] logout user profile",
+			"id": "21807576-1e0eae0b-5062-405f-8fb6-bb2a61f476d6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"auth",
+						"logout"
 					]
 				}
 			},
