@@ -6,13 +6,11 @@
 import app from '../app.js';
 import debug from 'debug';
 import http from 'http';
-import dotenv from 'dotenv'
-dotenv.config();
+
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort('3000' || process.env.PORT);
-console.log('Server running at: ', process.env.PORT)
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
