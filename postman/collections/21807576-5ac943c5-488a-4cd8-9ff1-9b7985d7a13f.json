@@ -76,6 +76,43 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[user] update user by uuid",
+			"id": "21807576-a25b9c85-fa5e-4ab1-bfc7-db509dd29084",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user002(update)\",\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/users/update/3098e7f2-d444-4c46-9c1e-f6dd1a2324d1d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"users",
+						"update",
+						"3098e7f2-d444-4c46-9c1e-f6dd1a2324d1d"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
