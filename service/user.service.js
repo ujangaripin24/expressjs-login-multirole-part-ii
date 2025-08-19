@@ -1,19 +1,44 @@
 import argon2 from 'argon2'
 import db from '../models/index.js'
 import dotenv from 'dotenv'
+import { Op } from 'sequelize';
 dotenv.config()
 const { TblUser } = db;
 
 const DEFAULT_AVATAR = process.env.DEFAULT_AVATAR;
 
-export const GetAllUser = async () => {
-    return await TblUser.findAll(
-        { attributes: ['name', 'email', 'link_picture'] }
-    );
+export const GetAllUser = async ({ page = 1, size = 10, search = "" }) => {
+    const limit = parseInt(size)
+    const offset = (parseInt(page) - 1) * parseInt(size)
+
+    const where = search ? {
+        [Op.or]: [
+            { name: { [Op.like]: `%${search}%` } },
+            { email: { [Op.like]: `%${search}%` } }
+        ]
+    } : {};
+
+    const { rows, count } = await TblUser.findAndCountAll({
+        attributes: ["name", "email", "link_picture"],
+        where,
+        limit,
+        offset,
+        order: [["name", "ASC"]]
+    });
+
+    const totalPage = Math.ceil(count / limit);
+
+    return {
+        data: rows,
+        size: limit,
+        page: parseInt(page),
+        totalPage,
+        totalData: count
+    };
 }
 
 export const getUserByID = async (uuid) => {
-    const user = await TblUser.findOne({where: {uuid}})
+    const user = await TblUser.findOne({ where: { uuid } })
     if (!user) {
         throw new Error("User Tidak ada");
     }
@@ -34,8 +59,8 @@ export const createUser = async (data) => {
     return user;
 }
 
-export const updateUser = async(uuid, payload) => {
-    const user = await TblUser.findOne({where: {uuid}})
+export const updateUser = async (uuid, payload) => {
+    const user = await TblUser.findOne({ where: { uuid } })
     if (!user) {
         throw new Error("User Tidak ada");
     }
@@ -56,8 +81,8 @@ export const updateUser = async(uuid, payload) => {
     return user;
 }
 
-export const deleteUser = async(uuid) => {
-    const user = await TblUser.findOne({where: {uuid}})
+export const deleteUser = async (uuid) => {
+    const user = await TblUser.findOne({ where: { uuid } })
     if (!user) {
         throw new Error("User Tidak ada");
     }
