@@ -26,3 +26,21 @@ export const updateUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+export const deleteUser = async (req, res) => {
+    try {
+        await userService.deleteUser(req.params.uuid);
+        res.json({ "msg": "user success deleted" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+export const getUserByID = async (req, res) => {
+    try {
+        const user = await userService.getUserByID(req.params.uuid);
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}

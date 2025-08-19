@@ -12,6 +12,14 @@ export const GetAllUser = async () => {
     );
 }
 
+export const getUserByID = async (uuid) => {
+    const user = await TblUser.findOne({where: {uuid}})
+    if (!user) {
+        throw new Error("User Tidak ada");
+    }
+    return user;
+}
+
 export const createUser = async (data) => {
     const { name, email, password, link_picture, role, type } = data;
     const hashedPassword = await argon2.hash(password);
@@ -45,5 +53,15 @@ export const updateUser = async(uuid, payload) => {
     }
 
     await user.save();
+    return user;
+}
+
+export const deleteUser = async(uuid) => {
+    const user = await TblUser.findOne({where: {uuid}})
+    if (!user) {
+        throw new Error("User Tidak ada");
+    }
+
+    await user.destroy();
     return user;
 }
