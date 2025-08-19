@@ -185,6 +185,42 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[auth] get user profile",
+			"id": "21807576-b660df27-2a7b-444e-a866-54ab85c6d182",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/auth/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
