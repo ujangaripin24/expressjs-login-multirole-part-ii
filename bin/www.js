@@ -3,14 +3,19 @@
 /**
  * Module dependencies.
  */
+import { log } from 'console';
 import app from '../app.js';
 import debug from 'debug';
 import http from 'http';
+import dotenv from 'dotenv'
+dotenv.config();
 
 /**
  * Get port from environment and store in Express.
  */
 const port = normalizePort(process.env.PORT || '3000');
+console.log("Server Run :", process.env.PORT);
+
 app.set('port', port);
 
 /**
