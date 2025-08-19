@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import './config/database.js'
 
 import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
+import usersRouter from './routes/users.routes.js';
 // import './config/database.js'
 import * as path from "node:path";
 
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/v1/web/', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

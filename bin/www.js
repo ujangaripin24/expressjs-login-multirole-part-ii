@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-import { log } from 'console';
 import app from '../app.js';
 import debug from 'debug';
 import http from 'http';
