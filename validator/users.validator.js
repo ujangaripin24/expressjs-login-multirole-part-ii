@@ -14,7 +14,17 @@ export const createUserValidator = [
             }
             return true;
         }),
-    body('password').notEmpty().withMessage("password is required")
+    body('password')
+        .notEmpty().withMessage("password is required")
+        .isLength({ min: 6 }).withMessage("Password minimal 6 karakter"),
+    body('confPassword')
+        .notEmpty().withMessage("Confirm password is required")
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error("Password dan confirm password tidak sama");
+            }
+            return true;
+        })
 ]
 
 export const updateUserValidator = [
@@ -54,4 +64,12 @@ export const updateUserValidator = [
     body('password')
         .optional()
         .isLength({ min: 6 }).withMessage('Password minimal 6 karakter'),
+    body('confPassword')
+        .optional()
+        .custom((value, { req }) => {
+            if (req.body.password && value !== req.body.password) {
+                throw new Error("Password dan confirm password tidak sama");
+            }
+            return true;
+        })
 ]
