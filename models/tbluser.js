@@ -39,6 +39,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.ENUM(['admin', 'user']),
       allowNull: false,
       defaultValue: 'user'
+    },
+    link_picture: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -46,8 +50,8 @@ export default (sequelize, DataTypes) => {
     tableName: 'tbl_users',
     freezeTableName: true,
     timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   });
   return TblUser;
 };
