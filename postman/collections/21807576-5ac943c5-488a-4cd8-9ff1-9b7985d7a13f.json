@@ -133,7 +133,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/users/get-all",
+					"raw": "http://localhost:52333/api/v1/web/users/detail/3098e7f2-d444-4c46-9c1e-f6dd1a2324d1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -144,7 +144,8 @@
 						"v1",
 						"web",
 						"users",
-						"get-all"
+						"detail",
+						"3098e7f2-d444-4c46-9c1e-f6dd1a2324d1"
 					]
 				}
 			},
@@ -161,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"1234567s89\"\n}",
+					"raw": "{\n    \"email\": \"\",\n    \"password\": \"1234567s89\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
