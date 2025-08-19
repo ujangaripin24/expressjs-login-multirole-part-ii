@@ -161,7 +161,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"user005\",\n    \"email\": \"user005@gmail.com\",\n    \"password\": \"123456789\",\n    \"confPassword\": \"123321231\"\n}",
+					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -169,7 +169,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/users/create",
+					"raw": "http://localhost:52333/api/v1/web/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -179,8 +179,8 @@
 						"api",
 						"v1",
 						"web",
-						"users",
-						"create"
+						"auth",
+						"login"
 					]
 				}
 			},
@@ -229,7 +229,7 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -241,7 +241,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/auth/profile",
+					"raw": "http://localhost:52333/api/v1/web/auth/logout",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -252,7 +252,7 @@
 						"v1",
 						"web",
 						"auth",
-						"profile"
+						"logout"
 					]
 				}
 			},
