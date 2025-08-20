@@ -277,7 +277,22 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/products/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"products",
+						"get-all"
+					]
+				}
 			},
 			"response": []
 		}
