@@ -270,7 +270,7 @@
 			"response": []
 		},
 		{
-			"name": "[auth] get user profile Copy",
+			"name": "[auth] get user profile mobile",
 			"id": "21807576-205721cc-6fac-4dd7-9738-04daeadaecbb",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
