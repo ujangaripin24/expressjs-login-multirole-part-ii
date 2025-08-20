@@ -2,10 +2,11 @@ import express from "express";
 import { validationResult } from "express-validator";
 import { loginValidator } from "../validator/auth.validator.js";
 import * as authController from "../controller/auth.controller.js";
+import { guardMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/auth/login", loginValidator, (req, res, next) => {
+router.post("/web/auth/login", loginValidator, (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -13,7 +14,10 @@ router.post("/auth/login", loginValidator, (req, res, next) => {
     next();
 }, authController.loginUser);
 
-router.get("/auth/profile", authController.getProfile);
-router.delete("/auth/logout", authController.Logout);
+router.get("/web/auth/profile", guardMiddleware, authController.getProfile);
+router.delete("/web/auth/logout", guardMiddleware, authController.Logout);
+
+router.post("/mobile/auth/login", guardMiddleware, authController.loginUserJwt);
+router.get("/mobile/auth/profile", guardMiddleware, authController.getProfileJwt)
 
 export default router;

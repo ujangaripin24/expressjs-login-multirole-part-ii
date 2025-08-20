@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/v1/web/', usersRouter);
-app.use('/api/v1/web/', authRouter);
+app.use('/api/v1/', authRouter);
 app.use('/api/v1/web/', productRouter);
 
 // catch 404 and forward to error handler
