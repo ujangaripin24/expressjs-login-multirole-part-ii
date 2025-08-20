@@ -281,7 +281,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2Njk2MTUsImV4cCI6MTc1NTkyODgxNX0.gMjlV9oD-z1Xrn2BtwgGA4I7UApM4QZtv_lyapLRnkQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2Njk4MzgsImV4cCI6MTc1NTkyOTAzOH0.sZQm8YLXySUffYuzHVbWwNTF46dKUBGEyAim2JobPOQ",
 							"type": "string"
 						}
 					]
