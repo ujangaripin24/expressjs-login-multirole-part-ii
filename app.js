@@ -10,7 +10,8 @@ import SequelizeStore from 'connect-session-sequelize';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.routes.js';
-import authRouter from './routes/auth.routes.js'
+import authRouter from './routes/auth.routes.js';
+import productRouter from './routes/product.routes.js';
 import * as path from "node:path";
 import session from 'express-session';
 
@@ -50,6 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/v1/web/', usersRouter);
 app.use('/api/v1/web/', authRouter);
+app.use('/api/v1/web/', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

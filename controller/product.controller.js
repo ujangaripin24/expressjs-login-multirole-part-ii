@@ -2,7 +2,7 @@ import * as productService from '../service/product.service.js'
 
 export const getAllProducts = async (req, res) => {
     try {
-        const product = await productService.getAllProducts(req.role, req.userId)
+        const product = await productService.getProduct(req.role, req.userId)
         res.status(200).json(product)
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] })
