@@ -21,8 +21,8 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        const { name, price, link_picture } = req.body
-        await productService.createProduct(name, price, link_picture, req.userId)
+        const { name, link_picture, price } = req.body
+        await productService.createProduct(req.userId, { name, link_picture, price })
         res.status(201).json({ msg: 'Product Created' })
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] })

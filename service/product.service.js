@@ -39,14 +39,15 @@ export const getProductById = async (uuid, role, userId) => {
     })
 }
 
-export const createProduct = async (data) => {
-    const { name, link_picture, price, userId } = data
+export const createProduct = async (userId, data) => {
+    const { name, link_picture, price } = data
     const product = await TblProduct.create({
         name,
-        link_picture: link_picture || DEFAULT_AVATAR,
         price,
+        link_picture: link_picture || DEFAULT_AVATAR,
         userId
     })
+    
     return product
 }
 
