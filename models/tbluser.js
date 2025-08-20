@@ -9,6 +9,10 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TblUser.hasMany(models.TblProduct, {
+        foreignKey: 'userId',
+        sourceKey: 'uuid'
+      });
     }
   }
   TblUser.init({
