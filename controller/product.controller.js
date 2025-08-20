@@ -11,7 +11,7 @@ export const getAllProducts = async (req, res) => {
 
 export const getProductById = async (req, res) => {
     try {
-        const product = await productService.getProductById(req.params.id, req.role, req.userId)
+        const product = await productService.getProductById(req.params.uuid, req.role, req.userId)
         if (!product) return res.status(404).json({ errors: [{ msg: error.message }] })
         res.status(200).json(product)
     } catch (error) {
@@ -32,7 +32,7 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const { name, price, link_picture } = req.body
-        const updated = await productService.updateProduct(req.params.id, req.role, req.userId, { name, price, link_picture })
+        const updated = await productService.updateProduct(req.params.uuid, req.role, req.userId, { name, price, link_picture })
         if (!updated) return res.status(404).json({ errors: [{ msg: error.message }] })
         if (updated === 'FORBIDDEN') return res.status(403).json({ errors: [{ msg: error.message }] })
         res.status(200).json({ msg: 'Product updated successfully' })
@@ -43,7 +43,7 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
     try {
-        const deleted = await productService.deleteProduct(req.params.id, req.role, req.userId)
+        const deleted = await productService.deleteProduct(req.params.uuid, req.role, req.userId)
         if (!deleted) return res.status(404).json({ errors: [{ msg: error.message }] })
         if (deleted === 'FORBIDDEN') return res.status(403).json({ errors: [{ msg: error.message }] })
         res.status(200).json({ msg: 'Product deleted successfully!' })
