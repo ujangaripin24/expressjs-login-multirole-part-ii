@@ -33,7 +33,7 @@ export const updateProduct = async (req, res) => {
     try {
         const { name, price, link_picture } = req.body
         const updated = await productService.updateProduct(req.params.id, req.role, req.userId, { name, price, link_picture })
-        if (!updated) return res.status(404).json({ errors: [{ msg: error.message }] }) \
+        if (!updated) return res.status(404).json({ errors: [{ msg: error.message }] })
         if (updated === 'FORBIDDEN') return res.status(403).json({ errors: [{ msg: error.message }] })
         res.status(200).json({ msg: 'Product updated successfully' })
     } catch (error) {
@@ -44,10 +44,10 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const deleted = await productService.deleteProduct(req.params.id, req.role, req.userId)
-        if (!deleted) return res.status(404).json({ msg: 'Data tidak ditemukan' })
-        if (deleted === 'FORBIDDEN') return res.status(403).json({ msg: 'Akses terlarang' })
+        if (!deleted) return res.status(404).json({ errors: [{ msg: error.message }] })
+        if (deleted === 'FORBIDDEN') return res.status(403).json({ errors: [{ msg: error.message }] })
         res.status(200).json({ msg: 'Product deleted successfully!' })
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        res.status(500).json({ errors: [{ msg: error.message }] })
     }
 }
