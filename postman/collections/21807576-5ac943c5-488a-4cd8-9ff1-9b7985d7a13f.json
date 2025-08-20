@@ -379,7 +379,7 @@
 			"response": []
 		},
 		{
-			"name": "[product] get all Copy",
+			"name": "[product] get all mobile",
 			"id": "21807576-8887d1b7-671a-4df7-8449-8cbde6a7e3fc",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
