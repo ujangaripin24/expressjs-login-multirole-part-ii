@@ -303,10 +303,10 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/products/get-all",
+					"raw": "http://localhost:52333/api/v1/web/products/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -317,7 +317,7 @@
 						"v1",
 						"web",
 						"products",
-						"get-all"
+						"create"
 					]
 				}
 			},
