@@ -172,7 +172,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n    \"email\": \"user001@gmail.com\",\n    \"password\": \"123456789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -276,6 +276,16 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2Njc5OTEsImV4cCI6MTc1NTkyNzE5MX0.jiK-NtrCmvYElfioaosOhxdIX4AE4neRDk93582YANs",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -288,7 +298,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/auth/profile",
+					"raw": "http://localhost:52333/api/v1/mobile/auth/profile",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -297,7 +307,7 @@
 					"path": [
 						"api",
 						"v1",
-						"web",
+						"mobile",
 						"auth",
 						"profile"
 					]
@@ -411,11 +421,11 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Produk 2\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
+					"raw": "{\n    \"name\": \"Produk 2 (update produk)\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -423,7 +433,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/products/create",
+					"raw": "http://localhost:52333/api/v1/web/products/update/bfc32c17-61b3-4f18-b1cb-087ee4577a19",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -434,7 +444,8 @@
 						"v1",
 						"web",
 						"products",
-						"create"
+						"update",
+						"bfc32c17-61b3-4f18-b1cb-087ee4577a19"
 					]
 				}
 			},
