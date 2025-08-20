@@ -1,0 +1,53 @@
+import * as productService from '../service/product.service.js'
+
+export const getAllProducts = async (req, res) => {
+    try {
+        const product = await productService.getAllProducts(req.role, req.userId)
+        res.status(200).json(product)
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] })
+    }
+}
+
+export const getProductById = async (req, res) => {
+    try {
+        const product = await productService.getProductById(req.params.id, req.role, req.userId)
+        if (!product) return res.status(404).json({ errors: [{ msg: error.message }] })
+        res.status(200).json(product)
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] })
+    }
+}
+
+export const createProduct = async (req, res) => {
+    try {
+        const { name, price, link_picture } = req.body
+        await productService.createProduct(name, price, link_picture, req.userId)
+        res.status(201).json({ msg: 'Product Created' })
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] })
+    }
+}
+
+export const updateProduct = async (req, res) => {
+    try {
+        const { name, price, link_picture } = req.body
+        const updated = await productService.updateProduct(req.params.id, req.role, req.userId, { name, price, link_picture })
+        if (!updated) return res.status(404).json({ errors: [{ msg: error.message }] }) \
+        if (updated === 'FORBIDDEN') return res.status(403).json({ errors: [{ msg: error.message }] })
+        res.status(200).json({ msg: 'Product updated successfully' })
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] })
+    }
+}
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const deleted = await productService.deleteProduct(req.params.id, req.role, req.userId)
+        if (!deleted) return res.status(404).json({ msg: 'Data tidak ditemukan' })
+        if (deleted === 'FORBIDDEN') return res.status(403).json({ msg: 'Akses terlarang' })
+        res.status(200).json({ msg: 'Product deleted successfully!' })
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+}
