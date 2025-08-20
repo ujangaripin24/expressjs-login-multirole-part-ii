@@ -172,7 +172,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n    \"email\": \"user001@gmail.com\",\n    \"password\": \"123456789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -190,6 +190,42 @@
 						"api",
 						"v1",
 						"web",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] post user login mobile",
+			"id": "21807576-76057059-12d4-4212-bb4f-281807bf811f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/mobile/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"mobile",
 						"auth",
 						"login"
 					]
@@ -226,6 +262,52 @@
 						"api",
 						"v1",
 						"web",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] get user profile mobile",
+			"id": "21807576-205721cc-6fac-4dd7-9738-04daeadaecbb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2NzEzNzIsImV4cCI6MTc1NTkzMDU3Mn0.FmOOWI9Re4LsMSvOxjPP9ClkEiT9tjNr5BsfGTq_F-4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/mobile/auth/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"mobile",
 						"auth",
 						"profile"
 					]
@@ -297,6 +379,36 @@
 			"response": []
 		},
 		{
+			"name": "[product] get all mobile",
+			"id": "21807576-8887d1b7-671a-4df7-8449-8cbde6a7e3fc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/products/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"products",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "[product] create product",
 			"id": "21807576-86cca1b0-13e6-4b53-b4ab-2729a888f0d7",
 			"protocolProfileBehavior": {
@@ -339,11 +451,11 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Produk 2\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
+					"raw": "{\n    \"name\": \"Produk 2 (update produk)\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -351,7 +463,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/products/create",
+					"raw": "http://localhost:52333/api/v1/web/products/update/bfc32c17-61b3-4f18-b1cb-087ee4577a19",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -362,7 +474,8 @@
 						"v1",
 						"web",
 						"products",
-						"create"
+						"update",
+						"bfc32c17-61b3-4f18-b1cb-087ee4577a19"
 					]
 				}
 			},
