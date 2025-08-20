@@ -331,6 +331,42 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[product] update product",
+			"id": "21807576-a63fe0eb-d9d7-402a-bdda-7d7ace2bc80b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Produk 2\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/products/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"products",
+						"create"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
