@@ -216,7 +216,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/auth/login",
+					"raw": "http://localhost:52333/api/v1/mobile/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -225,7 +225,7 @@
 					"path": [
 						"api",
 						"v1",
-						"web",
+						"mobile",
 						"auth",
 						"login"
 					]
