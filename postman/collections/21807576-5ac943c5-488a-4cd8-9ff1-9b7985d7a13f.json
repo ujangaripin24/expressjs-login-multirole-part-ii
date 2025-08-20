@@ -198,6 +198,42 @@
 			"response": []
 		},
 		{
+			"name": "[auth] post user login Copy",
+			"id": "21807576-76057059-12d4-4212-bb4f-281807bf811f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "[auth] get user profile",
 			"id": "21807576-b660df27-2a7b-444e-a866-54ab85c6d182",
 			"protocolProfileBehavior": {
