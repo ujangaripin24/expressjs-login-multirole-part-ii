@@ -307,7 +307,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Produk 1\",\n    \"price\": 10000,\n    \"link_picture\": \"\"\n}",
+					"raw": "{\n    \"name\": \"Produk 2\",\n    \"price\": 10000,\n    \"link_picture\": \"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
