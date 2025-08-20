@@ -34,3 +34,13 @@ export const Logout = (req, res) => {
         res.status(200).json({ msg: "Anda telah logout" });
     });
 }
+
+export const loginUserJwt = async (req, res) => {
+    try {
+        const user = await authService.loginUserJwt(req.body.email, req.body.password)
+
+        const token = jwt
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+}
