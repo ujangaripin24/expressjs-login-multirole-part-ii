@@ -1,4 +1,5 @@
 import * as authService from '../service/auth.service.js';
+import jwt from 'jsonwebtoken'
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -39,7 +40,34 @@ export const loginUserJwt = async (req, res) => {
     try {
         const user = await authService.loginUserJwt(req.body.email, req.body.password)
 
-        const token = jwt
+        const token = jwt.sign(
+            { uuid: user.uuid, role: user.role },
+            process.env.SECRET_TOKEN,
+            { expiresIn: '3d' }
+        )
+
+        const { uuid, name, email, role } = user
+        res.status(200).json({
+            token,
+            user: { uuid, name, email, role }
+        })
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+}
+
+export const getProfileJwt = async (req, res) => {
+    try {
+        const authHeader = req.headers['authorization']
+        if (!authHeader) {
+            return res.status(401).json({ msg: "Token tidak ditemukan" })
+        }
+
+        const token = authHeader.split(' ')[1]
+        const decoded = jwt.verify(token, process.env.SECRET_TOKEN)
+
+        const user = await authService.getProfileJwt(decoded.uuid)
+        res.status(200).json(user)
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
