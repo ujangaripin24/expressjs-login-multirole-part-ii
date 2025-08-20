@@ -281,7 +281,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2NzAxOTUsImV4cCI6MTc1NTkyOTM5NX0.Wp0tTAcxegjImZaOrgbGK6K5YGY7j2s4nq6k-ur62So",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2NzEzNzIsImV4cCI6MTc1NTkzMDU3Mn0.FmOOWI9Re4LsMSvOxjPP9ClkEiT9tjNr5BsfGTq_F-4",
 							"type": "string"
 						}
 					]
@@ -290,10 +290,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"user003\",\n    \"email\": \"user003@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
-							"language": "json"
+							"language": "text"
 						}
 					}
 				},
