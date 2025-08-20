@@ -1,4 +1,7 @@
 import db from '../models/index.js'
+import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
+dotenv.config();
 const { TblUser } = db
 
 export const guardMiddleware = async (req, res, next) => {
@@ -26,13 +29,15 @@ export const guardMiddleware = async (req, res, next) => {
                 if (!user) {
                     return res.status(404).json({ errors: [{ msg: "User tidak ditemukan" }] })
                 }
+                console.log("SECRET_TOKEN:", process.env.SECRET_TOKEN);
+                console.log("Decoded:", decoded);
                 userId = user.uuid
                 role = user.role
             } catch (err) {
                 if (err.name === "TokenExpiredError") {
                     return res.status(401).json({ errors: [{ msg: "Token sudah kadaluarsa" }] })
                 }
-                return res.status(403).json({ errors: [{ msg: "Token tidak valid" }] })
+                return res.status(403).json({ errors: [{ msg: "Token tidak valid [middleware]" }] })
             }
         }
         req.userId = userId

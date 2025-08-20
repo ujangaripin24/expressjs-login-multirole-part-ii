@@ -17,7 +17,7 @@ router.post("/web/auth/login", loginValidator, (req, res, next) => {
 router.get("/web/auth/profile", guardMiddleware, authController.getProfile);
 router.delete("/web/auth/logout", guardMiddleware, authController.Logout);
 
-router.post("/mobile/auth/login", guardMiddleware, authController.loginUserJwt);
+router.post("/mobile/auth/login", authController.loginUserJwt);
 router.get("/mobile/auth/profile", guardMiddleware, authController.getProfileJwt)
 
 export default router;

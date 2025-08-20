@@ -48,4 +48,5 @@ export const getProfileJwt = async (uuid) => {
     if (!user) {
         throw new Error("Uset tidak ditemukan");
     }
+    return user
 }

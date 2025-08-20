@@ -1,5 +1,7 @@
 import * as authService from '../service/auth.service.js';
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config();
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -46,10 +48,10 @@ export const loginUserJwt = async (req, res) => {
             { expiresIn: '3d' }
         )
 
-        const { uuid, name, email, role } = user
         res.status(200).json({
-            token,
-            user: { uuid, name, email, role }
+            token_type: "Bearer",
+            expires_in: 3 * 24 * 60 * 60,
+            access_token: token,
         })
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
@@ -67,6 +69,8 @@ export const getProfileJwt = async (req, res) => {
         const decoded = jwt.verify(token, process.env.SECRET_TOKEN)
 
         const user = await authService.getProfileJwt(decoded.uuid)
+        console.log("dari controller: ", user);
+        
         res.status(200).json(user)
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
