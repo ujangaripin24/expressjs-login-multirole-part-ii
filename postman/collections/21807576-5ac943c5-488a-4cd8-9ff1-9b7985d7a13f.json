@@ -307,7 +307,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Produk 1\",\n    \"price\": 10000\n}",
+					"raw": "{\n    \"name\": \"Produk 1\",\n    \"price\": 10000,\n    \"link_picture\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
