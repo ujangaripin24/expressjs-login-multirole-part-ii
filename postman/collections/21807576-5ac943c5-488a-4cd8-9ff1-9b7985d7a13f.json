@@ -270,7 +270,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "[product] get all",
 			"id": "21807576-38dd4a70-e765-4805-ba25-43517ca1b526",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
