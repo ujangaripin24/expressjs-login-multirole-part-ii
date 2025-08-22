@@ -491,7 +491,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/products/get-all",
+					"raw": "http://localhost:52333/api/v1/web/public/product/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -501,7 +501,8 @@
 						"api",
 						"v1",
 						"web",
-						"products",
+						"public",
+						"product",
 						"get-all"
 					]
 				}
