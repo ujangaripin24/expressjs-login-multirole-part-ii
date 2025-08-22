@@ -6,6 +6,12 @@ dotenv.config()
 const { TblProduct, TblUser } = db;
 const DEFAULT_AVATAR = process.env.DEFAULT_AVATAR;
 
+export const getAllProduct = async() => {
+    return await TblProduct.findAll({
+        attributes: ['uuid', 'name', 'link_picture', 'price'],
+    })
+}
+
 export const getProduct = async (role, userId) => {
     if (role === 'admin') {
         return await TblProduct.findAll({
