@@ -480,6 +480,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[product] get all public",
+			"id": "21807576-aa26a8fc-4afa-42f6-bd93-22dd58d9a639",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:52333/api/v1/web/public/product/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"web",
+						"public",
+						"product",
+						"get-all"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
