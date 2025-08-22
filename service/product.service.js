@@ -1,6 +1,6 @@
 import db from "../models/index.js";
 import dotenv from 'dotenv'
-import { Op, where } from 'sequelize';
+import { Op } from 'sequelize';
 dotenv.config()
 
 const { TblProduct, TblUser } = db;
