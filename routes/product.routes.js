@@ -5,6 +5,8 @@ import { createProductValidator, updateProductValidator } from '../validator/pro
 const router = express.Router()
 
 router.get('/products/get-all', guardMiddleware, productController.getAllProducts)
+router.get('/public/product/get-all', productController.getAllProduct)
+router.get('/public/product/detail/:uuid', productController.getProductById)
 router.get('/products/detail/:uuid', guardMiddleware, productController.getProductById)
 router.post('/products/create', guardMiddleware, createProductValidator, productController.createProduct)
 router.put('/products/update/:uuid', guardMiddleware, updateProductValidator, productController.updateProduct)

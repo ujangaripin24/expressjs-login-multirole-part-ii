@@ -6,10 +6,33 @@ dotenv.config()
 const { TblProduct, TblUser } = db;
 const DEFAULT_AVATAR = process.env.DEFAULT_AVATAR;
 
-export const getAllProduct = async() => {
-    return await TblProduct.findAll({
-        attributes: ['uuid', 'name', 'link_picture', 'price'],
-    })
+export const getAllProduct = async({page = 1, size = 10, search = ""}) => {
+    const limit = parseInt(size)
+    const offset = (parseInt(page) - 1) * parseInt(size)
+
+    const where = search ? {
+        [Op.or] : [
+            { name : { [Op.like] : `%${search}%` } },
+        ]
+    } : {};
+
+    const {row, count} = await TblProduct.findAndCountAll({
+        attributes: ["name", "link_picture", "price"],
+        where,
+        limit,
+        offset,
+        order: [["name", "ASC"]]
+    });
+
+    const totalPage = Math.ceil(count / limit);
+
+    return{
+        data : row,
+        size : limit,
+        page : parseInt(page),
+        totalPage,
+        totalData : count
+    }
 }
 
 export const getProduct = async (role, userId) => {

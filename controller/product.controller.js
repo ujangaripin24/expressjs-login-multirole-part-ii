@@ -2,8 +2,22 @@ import * as productService from '../service/product.service.js'
 
 export const getAllProduct = async (req, res) => {
     try {
-        const product = await productService.getAllProduct()
-        res.status(200).json(product)
+        const { page, size, search } = req.query
+        const result = await productService.getAllProduct({ page, size, search })
+
+        if (!result.data || result.data.length === 0) {
+            return res.status(200).json({ msg: "tidak ada data" });
+        }
+
+        res.status(200).json({
+            status: 200,
+            data: result.data,
+            size: result.size,
+            page: result.page,
+            totalPage: result.totalPage,
+            totalData: result.totalData
+        })
+
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] })
     }
