@@ -11,7 +11,7 @@ module.exports = {
      */
     await queryInterface.changeColumn('tbl_users', 'password', {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     })
 
   },
@@ -25,7 +25,7 @@ module.exports = {
      */
     await queryInterface.changeColumn('tbl_users', 'password', {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     })
   }
 };

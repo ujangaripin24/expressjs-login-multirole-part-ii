@@ -76,3 +76,35 @@ export const getProfileJwt = async (req, res) => {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
 }
+
+export const loginWithGoogle = async (req, res) => {
+  try {
+    const { email, name, picture } = req.body
+
+    let user = await TblUser.findOne({ where: { email } })
+    if (!user) {
+      user = await TblUser.create({
+        name,
+        email,
+        password: null,
+        type: 'google',
+        role: 'user',
+        link_picture: picture
+      })
+    }
+
+    const token = jwt.sign(
+      { uuid: user.uuid, role: user.role },
+      process.env.SECRET_TOKEN,
+      { expiresIn: '3d' }
+    )
+
+    res.status(200).json({
+      token_type: "Bearer",
+      access_token: token,
+      expires_in: 3 * 24 * 60 * 60
+    })
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: error.message }] })
+  }
+}

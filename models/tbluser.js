@@ -28,11 +28,11 @@ export default (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     type: {
       type: DataTypes.ENUM(['manual', 'google', 'facebook']),
@@ -46,7 +46,7 @@ export default (sequelize, DataTypes) => {
     },
     link_picture: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
