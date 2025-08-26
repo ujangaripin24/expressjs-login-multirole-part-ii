@@ -281,7 +281,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzA5OGU3ZjItZDQ0NC00YzQ2LTljMWUtZjZkZDFhMjMyNGQxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU2NzEzNzIsImV4cCI6MTc1NTkzMDU3Mn0.FmOOWI9Re4LsMSvOxjPP9ClkEiT9tjNr5BsfGTq_F-4",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZmI0MTBjYzktOTNiNi00ZjcwLTk3MmUtOTdjMGU3YTAzYWU2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTYxODM4MTgsImV4cCI6MTc1NjQ0MzAxOH0.BEjj-W-qfhwM9Z6QlnASVpOE2ofmgpaBwECLd6UGEkI",
 							"type": "string"
 						}
 					]
@@ -491,7 +491,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/public/product/get-all",
+					"raw": "http://localhost:52333/api/v1/web/public/product/get-all?search=&size=2&page=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -504,6 +504,20 @@
 						"public",
 						"product",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "size",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
 					]
 				}
 			},
