@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        padding: 20px;
+      }
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #4f46e5;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-top: 16px;
+      }
+  body
+    .card
+      h2 Halo #{name},
+      p Akun Anda #{email} baru saja login pada aplikasi <b>MyApp</b>.
+      p Waktu login: #{time}
+      p Jika ini bukan Anda, segera amankan akun Anda.
+      a.btn(href="https://myapp.com/security") Amankan Akun
+      p(style="margin-top: 20px; font-size: 12px; color: #666") 
+        Email ini dikirim secara otomatis, harap jangan dibalas.
