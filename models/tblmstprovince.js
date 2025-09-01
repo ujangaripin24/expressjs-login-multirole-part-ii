@@ -1,7 +1,7 @@
 'use strict';
 import { Model } from 'sequelize';
 export default (sequelize, DataTypes) => {
-  class MasterProvince extends Model {
+  class TblMstProvince extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,11 +11,12 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   }
-  MasterProvince.init({
+  TblMstProvince.init({
     id: {
-      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      autoIncrement: true
+      type: DataTypes.INTEGER
     },
     name_provinces: {
       type: DataTypes.STRING,
@@ -23,12 +24,12 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'MasterProvince',
-    tableName: 'tbl_mst_provinces',
-    freezeTableName: true,
+    modelName: 'TblMstProvince',
+    tableName: 'tbl_master_provinces',
     timestamps: true,
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    freezeTableName: true
   });
-  return MasterProvince;
+  return TblMstProvince;
 };

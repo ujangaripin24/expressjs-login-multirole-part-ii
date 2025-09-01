@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('MasterProvinces', {
+    await queryInterface.createTable('tbl_master_provinces', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,6 +26,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('MasterProvinces');
+    await queryInterface.dropTable('tbl_master_provinces');
   }
 };

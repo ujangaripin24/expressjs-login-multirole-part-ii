@@ -11,7 +11,8 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       email: {
         type: Sequelize.STRING,
@@ -19,12 +20,16 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       type: {
         type: Sequelize.ENUM(['manual', 'google', 'facebook']),
         allowNull: false,
         defaultValue: 'manual'
+      },
+      link_picture: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       role: {
         type: Sequelize.ENUM(['admin', 'user']),
@@ -44,6 +49,7 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('tbl_users', 'tbl_products_userId_fkey');
     await queryInterface.dropTable('tbl_users');
   }
 };

@@ -42,6 +42,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('TblProducts');
+    await queryInterface.removeConstraint('tbl_products', 'tbl_products_userId_fkey');
+    await queryInterface.dropTable('tbl_products');
   }
 };
