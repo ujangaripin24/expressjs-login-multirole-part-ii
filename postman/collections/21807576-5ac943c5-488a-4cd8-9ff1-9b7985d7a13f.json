@@ -563,6 +563,45 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[mst province] get all",
+			"id": "21807576-d02db2d2-efe3-4e41-b570-11063a69f8d8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/provinces.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/provinsi/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"provinsi",
+						"upload"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
