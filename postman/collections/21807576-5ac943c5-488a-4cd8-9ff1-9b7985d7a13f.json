@@ -565,7 +565,7 @@
 			"response": []
 		},
 		{
-			"name": "[mst province] upload data Copy",
+			"name": "[mst regencies] upload data",
 			"id": "21807576-aa114b5d-f686-46ef-b84e-a736ed852ce7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
