@@ -1,8 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+import { Model } from 'sequelize';
+export default (sequelize, DataTypes) => {
   class TblMstRegencies extends Model {
     /**
      * Helper method for defining associations.
@@ -11,15 +9,32 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TblMstRegencies.belongsTo(models.TblMstProvince, {
+        foreignKey: 'id_provinces',
+        as: 'province'
+      });
     }
   }
   TblMstRegencies.init({
-    id: DataTypes.INTEGER,
-    id_provinces: DataTypes.STRING,
-    name_provinces: DataTypes.STRING
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    id_provinces: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    name_regencies: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'TblMstRegencies',
+    tableName: 'tbl_master_regencies',
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   });
   return TblMstRegencies;
 };

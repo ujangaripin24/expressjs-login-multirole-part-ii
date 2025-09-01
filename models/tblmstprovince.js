@@ -9,6 +9,10 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TblMstProvince.hasMany(models.TblMstRegencies, {
+        foreignKey: 'id_provinces',
+        as: 'regencies'
+      });
     }
   }
   TblMstProvince.init({
