@@ -13,6 +13,7 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.routes.js';
 import authRouter from './routes/auth.routes.js';
 import productRouter from './routes/product.routes.js';
+import mstProvinceRouter from './routes/mst-province.routes.js'
 import * as path from "node:path";
 import session from 'express-session';
 import helmet from 'helmet';
@@ -56,6 +57,7 @@ app.use('/', indexRouter);
 app.use('/api/v1/web/', usersRouter);
 app.use('/api/v1/web/', productRouter);
 app.use('/api/v1/', authRouter);
+app.use('/api/v1/', mstProvinceRouter);
 
 
 // catch 404 and forward to error handler
