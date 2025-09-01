@@ -643,7 +643,7 @@
 			"response": []
 		},
 		{
-			"name": "[mst regencies] get all Copy",
+			"name": "[mst provinsi] get all",
 			"id": "21807576-65d44034-e8bc-4570-a846-7e748d1882cf",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -663,7 +663,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all",
+					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -674,7 +674,7 @@
 						"v1",
 						"master",
 						"data",
-						"regencies",
+						"provinsi",
 						"get-all"
 					]
 				}
