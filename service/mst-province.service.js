@@ -27,7 +27,7 @@ export const uploadProvinceCSV = async (buffer) => {
 
 export const getAllProvinces = async () => {
   return await TblMstProvince.findAll({
-    attributes: ["id", "name_province"],
-    order: [["name_province", "ASC"]],
+    attributes: ["id", "name_provinces"],
+    order: [["name_provinces", "ASC"]],
   })
 }
