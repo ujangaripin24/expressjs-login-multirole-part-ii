@@ -1,8 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+import { Model } from 'sequelize';
+export default (sequelize, DataTypes) => {
   class MasterProvince extends Model {
     /**
      * Helper method for defining associations.
@@ -14,11 +12,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   MasterProvince.init({
-    id: DataTypes.INTEGER,
-    name_provinces: DataTypes.STRING
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name_provinces: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'MasterProvince',
+    tableName: 'tbl_mst_provinces',
+    freezeTableName: true,
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   });
   return MasterProvince;
 };
