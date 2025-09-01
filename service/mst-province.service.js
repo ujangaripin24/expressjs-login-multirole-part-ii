@@ -10,14 +10,19 @@ export const uploadProvinceCSV = async (buffer) => {
     skip_empty_lines: true
   });
 
-  const data = records.map((row) => ({
-    id: parseInt(row.id),
-    name_provinces: row.name_provinces,
-  }));
+  let count = 0;
 
-  await TblMstProvince.bulkCreate(data, { ignoreDuplicates: true });
-
-  return { count: data.length };
+  await db.sequelize.transaction(async (t) => {
+    for (const row of records) {
+      const data = {
+        id: parseInt(row.id),
+        name_provinces: row.name_provinces,
+      };
+      await TblMstProvince.upsert(data, { transaction: t });
+      count++;
+    }
+  })
+  return { count };
 }
 
 export const getAllProvinces = async () => {
