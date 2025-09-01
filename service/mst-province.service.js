@@ -14,7 +14,7 @@ export const uploadProvinceCSV = async (filePath) => {
       .on("data", (row) => {
         results.push({
           id: parseInt(row.id),
-          name_province: row.name_province,
+          name_provinces: row.name_provinces,
         });
       })
       .on("end", async () => {
