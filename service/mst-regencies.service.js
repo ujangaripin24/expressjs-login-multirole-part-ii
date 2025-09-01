@@ -1,4 +1,5 @@
 import db from "../models/index.js";
+import { parse } from "csv-parse/sync";
 
 const { TblMstRegencies } = db;
 
