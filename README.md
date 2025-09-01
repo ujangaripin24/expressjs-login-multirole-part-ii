@@ -177,3 +177,184 @@ Ini otomatis nambahin header seperti:
 ---
 
 Mau saya bikinkan **template middleware keamanan Express** yang gabungin rate-limit, helmet, dan validator biar kamu langsung bisa plug ke project?
+
+
+### Upload data file csv more than 5mb using folder
+Oke, sip 👍 aku sudah paham standar coding-mu.
+Berarti format module `mst-province` harus dibagi ke **service**, **controller**, dan **routes**, mirip dengan `product`.
+Aku sesuaikan biar konsisten dengan style kamu (pakai `export const ...` di service, controller, dan routing terpisah).
+
+---
+
+## 📂 Struktur Folder
+
+```
+/service/mst-province.service.js
+/controller/mst-province.controller.js
+/routes/mst-province.routes.js
+```
+
+---
+
+## 1️⃣ Service → `mst-province.service.js`
+
+```js
+import db from "../models/index.js";
+import fs from "fs";
+import csv from "csv-parser";
+
+const { TblMasterProvince } = db;
+
+export const uploadProvinceCSV = async (filePath) => {
+    return new Promise((resolve, reject) => {
+        const results = [];
+
+        fs.createReadStream(filePath)
+            .pipe(csv())
+            .on("data", (row) => {
+                results.push({
+                    id: parseInt(row.id),
+                    name_provinces: row.name_provinces,
+                });
+            })
+            .on("end", async () => {
+                try {
+                    await TblMasterProvince.bulkCreate(results, {
+                        ignoreDuplicates: true,
+                    });
+
+                    resolve({
+                        message: "Data provinsi berhasil diimport",
+                        count: results.length,
+                    });
+                } catch (error) {
+                    reject(error);
+                }
+            })
+            .on("error", (err) => reject(err));
+    });
+};
+
+export const getAllProvinces = async () => {
+    return await TblMasterProvince.findAll({
+        attributes: ["id", "name_provinces"],
+        order: [["name_provinces", "ASC"]],
+    });
+};
+```
+
+---
+
+## 2️⃣ Controller → `mst-province.controller.js`
+
+```js
+import * as provinceService from "../service/mst-province.service.js";
+
+export const uploadProvince = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ msg: "File CSV harus diupload" });
+        }
+
+        const result = await provinceService.uploadProvinceCSV(req.file.path);
+
+        res.status(200).json({
+            status: 200,
+            message: result.message,
+            totalData: result.count,
+        });
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+};
+
+export const getAllProvince = async (req, res) => {
+    try {
+        const provinces = await provinceService.getAllProvinces();
+
+        if (!provinces || provinces.length === 0) {
+            return res.status(200).json({ msg: "tidak ada data" });
+        }
+
+        res.status(200).json({
+            status: 200,
+            data: provinces,
+        });
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+};
+```
+
+---
+
+## 3️⃣ Routes → `mst-province.routes.js`
+
+```js
+import express from "express";
+import multer from "multer";
+import path from "path";
+import * as provinceController from "../controller/mst-province.controller.js";
+
+const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./uploads");
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const upload = multer({ storage });
+
+// Upload CSV
+router.post(
+    "/master/data/provinsi/upload",
+    upload.single("file"),
+    provinceController.uploadProvince
+);
+
+// Get All Province
+router.get(
+    "/master/data/provinsi/get-all",
+    provinceController.getAllProvince
+);
+
+export default router;
+```
+
+---
+
+## 4️⃣ Tambahkan ke `server.js` / `app.js`
+
+```js
+import provinceRoutes from "./routes/mst-province.routes.js";
+
+app.use("/api/v1", provinceRoutes);
+```
+
+---
+
+## 5️⃣ Cara Coba
+
+📌 **Upload CSV**
+
+```
+POST http://localhost:3000/api/v1/master/data/provinsi/upload
+```
+
+* Body: form-data
+* Key: `file` → type: File → pilih `provinsi.csv`
+
+📌 **Get Semua Provinsi**
+
+```
+GET http://localhost:3000/api/v1/master/data/provinsi/get-all
+```
+
+---
+
+⚡ Dengan ini module `mst-province` sudah konsisten sama dengan `product` module di aplikasi kamu.
+Mau aku bikinkan juga **migration & model Sequelize** untuk `TblMasterProvince` biar langsung bisa dipakai di service?

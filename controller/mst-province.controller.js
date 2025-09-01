@@ -6,10 +6,10 @@ export const uploadProvince = async (req, res) => {
             return res.status(400).json({ msg: "File CSV harus diupload" });
         }
 
-        const result = await provinceService.uploadProvinceCSV(req.file.path);
+        const result = await provinceService.uploadProvinceCSV(req.file.buffer);
         res.status(200).json({
             status: 200,
-            message: result.message,
+            message: "Import data provinsi berhasil",
             totalData: result.count,
         });
     } catch (error) {
@@ -22,7 +22,7 @@ export const getAllProvince = async (req, res) => {
         const provinces = await provinceService.getAllProvinces();
 
         if (!provinces || provinces.length === 0) {
-            return res.status(200).json({ msg: "tidak ada data" });
+            return res.status(200).json({ errors: [{ msg: "tidak ada data" }] });
         }
 
         res.status(200).json({

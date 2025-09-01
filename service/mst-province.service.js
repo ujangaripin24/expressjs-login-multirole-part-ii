@@ -1,40 +1,23 @@
 import db from "../models/index.js"
-import fs from "fs"
-import csv from "csv-parser"
-import { resolve } from "path";
-import { rejects } from "assert";
+import { parse } from "csv-parse/sync";
 const { TblMstProvince } = db;
 
-export const uploadProvinceCSV = async (filePath) => {
-  return new Promise((resolve, rejects) => {
-    const results = [];
+export const uploadProvinceCSV = async (buffer) => {
+  const csvString = buffer.toString();
 
-    fs.createReadStream(filePath)
-      .pipe(csv())
-      .on("data", (row) => {
-        results.push({
-          id: parseInt(row.id),
-          name_provinces: row.name_provinces,
-        });
-      })
-      .on("end", async () => {
-        try {
-          await TblMstProvince.bulkCreate(results, {
-            ignoreDuplicates: true,
-          });
+  const records = parse(csvString, {
+    columns: true,
+    skip_empty_lines: true
+  });
 
-          resolve({
-            message: "Data provinsi berhasil diimport",
-            count: results.length,
-          })
-        } catch (error) {
-          rejects(error)
-        }
-      })
-      .on("error", (error) => {
-        rejects(error)
-      })
-  })
+  const data = records.map((row) => ({
+    id: parseInt(row.id),
+    name_provinces: row.name_provinces,
+  }));
+
+  await TblMstProvince.bulkCreate(data, { ignoreDuplicates: true });
+
+  return { count: data.length };
 }
 
 export const getAllProvinces = async () => {

@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.createTable('tbl_master_provinces', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
