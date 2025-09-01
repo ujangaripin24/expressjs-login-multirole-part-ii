@@ -208,7 +208,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user002@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n    \"email\": \"user002@gmaisl.com\",\n    \"password\": \"123456789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -216,12 +216,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/mobile/auth/login",
-					"protocol": "http",
+					"raw": "https://expressjs-login-multirole-part-ii.vercel.app/api/v1/mobile/auth/login",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"expressjs-login-multirole-part-ii",
+						"vercel",
+						"app"
 					],
-					"port": "52333",
 					"path": [
 						"api",
 						"v1",
@@ -281,7 +282,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZmI0MTBjYzktOTNiNi00ZjcwLTk3MmUtOTdjMGU3YTAzYWU2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTYxODM4MTgsImV4cCI6MTc1NjQ0MzAxOH0.BEjj-W-qfhwM9Z6QlnASVpOE2ofmgpaBwECLd6UGEkI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNjI2MTIwM2EtNjhkOC00OWZlLTkzZTUtYjQyOGVhYWU3MTE1Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTYzNjczNDMsImV4cCI6MTc1NjYyNjU0M30.UPLB4WoZY9OMcg6QEw4LrDfI8Z8pXoP7mfeEmW6dvMw",
 							"type": "string"
 						}
 					]
@@ -298,12 +299,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/mobile/auth/profile",
-					"protocol": "http",
+					"raw": "https://expressjs-login-multirole-part-ii.vercel.app/api/v1/mobile/auth/profile",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"expressjs-login-multirole-part-ii",
+						"vercel",
+						"app"
 					],
-					"port": "52333",
 					"path": [
 						"api",
 						"v1",
@@ -520,6 +522,18 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "[mst province] upload data",
+			"id": "21807576-31a48cff-a06a-4208-a548-1a1a9bcac6cf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
