@@ -624,7 +624,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all",
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -635,7 +635,7 @@
 						"v1",
 						"master",
 						"data",
-						"provinsi",
+						"regencies",
 						"get-all"
 					]
 				}
