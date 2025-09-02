@@ -580,12 +580,12 @@
 							"key": "file",
 							"type": "file",
 							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
-							"src": "/home/pratiwi24/Downloads/provinces.csv"
+							"src": "/home/pratiwi24/Downloads/regencies.csv"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/provinsi/upload",
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/upload",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -596,7 +596,7 @@
 						"v1",
 						"master",
 						"data",
-						"provinsi",
+						"regencies",
 						"upload"
 					]
 				}
@@ -714,6 +714,162 @@
 						"master",
 						"data",
 						"provinsi",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[mst districs] upload data",
+			"id": "21807576-0ee68758-9d29-4aed-bc08-6fa21bced9af",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/districts.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/districts/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"districts",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[mst districs] get all data",
+			"id": "21807576-2e67e627-293e-422e-903b-316d33924d92",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/districts.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/districts/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"districts",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[mst districs] get data by regencies",
+			"id": "21807576-907bb2b2-41e5-4a5a-8a82-7508183dfcd7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/districts.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/districts/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"districts",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[mst regencies] get data by provinces",
+			"id": "21807576-c9c64333-8339-457c-86f8-259de7f55b52",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/provinces.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"regencies",
 						"get-all"
 					]
 				}
