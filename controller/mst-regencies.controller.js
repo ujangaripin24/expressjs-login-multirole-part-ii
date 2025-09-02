@@ -38,8 +38,8 @@ export const getRegenciesByProvince = async (req, res) => {
     try {
         const { provinceId } = req.params;
         const { search } = req.query;
+
         const regencies = await regenciesService.getRegenciesByProvince(provinceId, search);
-        console.log("controller: ", provinceId)
 
         if (!regencies || regencies.length === 0) {
             return res.status(404).json({ errors: [{ msg: "Tidak ada data regencies untuk provinsi ini" }] });

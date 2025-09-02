@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import db from '../models/index.js'
 import { parse } from 'csv-parse/sync'
 
@@ -29,9 +30,17 @@ export const getAllDistricts = async () => {
   })
 }
 
-export const getDistrictsByRegencies = async (regenciesId) => {
+export const getDistrictsByRegencies = async (regenciesId, search) => {
+  const where = { id_regencies: regenciesId }
+
+  if (search) {
+    where.name_districts = {
+      [Op.iLike]: `%${search}%`
+    }
+  }
+
   return await TblMstDistricts.findAll({
-    where: { id_regencies: regenciesId },
+    where,
     attributes: ["id", "id_regencies", "name_districts"],
     order: [["name_districts", "ASC"]]
   })
