@@ -663,7 +663,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all",
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all?search=BANDU",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -676,6 +676,12 @@
 						"data",
 						"regencies",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "BANDU"
+						}
 					]
 				}
 			},
@@ -702,7 +708,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all",
+					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all?search=jaw",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -715,6 +721,12 @@
 						"data",
 						"provinsi",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "jaw"
+						}
 					]
 				}
 			},
@@ -819,7 +831,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/districts/get-all",
+					"raw": "http://localhost:52333/api/v1/master/data/districts/3271/detail?search=ABELI",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -831,7 +843,14 @@
 						"master",
 						"data",
 						"districts",
-						"get-all"
+						"3271",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "ABELI"
+						}
 					]
 				}
 			},
@@ -858,7 +877,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all",
+					"raw": "http://localhost:52333/api/v1/master/regencies/32/detail?search=bandung",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -868,9 +887,15 @@
 						"api",
 						"v1",
 						"master",
-						"data",
 						"regencies",
-						"get-all"
+						"32",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "bandung"
+						}
 					]
 				}
 			},
