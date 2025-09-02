@@ -15,6 +15,7 @@ import authRouter from './routes/auth.routes.js';
 import productRouter from './routes/product.routes.js';
 import mstProvinceRouter from './routes/mst-province.routes.js'
 import mstRegenciesRouter from './routes/mst-regencies.routes.js'
+import mstDistrictsRouter from './routes/mst-districts.routes.js'
 import * as path from "node:path";
 import session from 'express-session';
 import helmet from 'helmet';
@@ -60,7 +61,7 @@ app.use('/api/v1/web/', productRouter);
 app.use('/api/v1/', authRouter);
 app.use('/api/v1/', mstProvinceRouter);
 app.use('/api/v1/', mstRegenciesRouter);
-
+app.use('/api/v1/', mstDistrictsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

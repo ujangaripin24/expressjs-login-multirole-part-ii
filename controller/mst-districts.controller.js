@@ -32,3 +32,20 @@ export const getAllDistricts = async (req, res) => {
     res.status(500).json({ errors: [{ msg: error.message }] });
   }
 }
+
+export const getDistrictsByProvince = async (req, res) => {
+    try {
+        const {regenciesId} = req.params;
+        const districts = await districtsService.getDistrictsByRegencies(regenciesId)
+        if (!districts || districts.length === 0) {
+            return res.status(404).json({ msg: "Tidak ada data regencies untuk provinsi ini" });
+        }
+        res.status(200).json({
+            status: 200,
+            regenciesId,
+            data: districts,
+        });
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+}
