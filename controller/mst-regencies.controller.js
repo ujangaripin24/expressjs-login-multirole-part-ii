@@ -32,3 +32,23 @@ export const getAllRegencies = async (req, res) => {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
 };
+
+export const getRegenciesByProvince = async (req, res) => {
+    try {
+        const {provinceId} = req.params;
+        const regencies = await regenciesService.getRegenciesByProvince(provinceId);
+        console.log("controller: ", provinceId)
+
+        if (!regencies || regencies.length === 0) {
+            return res.status(404).json({ msg: "Tidak ada data regencies untuk provinsi ini" });
+        }
+
+        res.status(200).json({
+            status: 200,
+            provinceId,
+            data: regencies,
+        });
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+}

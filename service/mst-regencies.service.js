@@ -1,7 +1,7 @@
 import db from "../models/index.js";
 import { parse } from "csv-parse/sync";
 
-const { TblMstRegencies } = db;
+const { TblMstRegencies, TblMstProvince } = db;
 
 export const uploadRegenciesCSV = async (buffer) => {
     const csvString = buffer.toString()
@@ -32,4 +32,12 @@ export const getAllRegencies = async () => {
         attributes: ["id", "name_regencies"],
         order: [["name_regencies", "ASC"]],
     })
+}
+
+export const getRegenciesByProvince = async (provinceId) => {
+    return await TblMstRegencies.findAll({
+        where: {id_provinces: provinceId},
+        attributes: ["id", "id_provinces", "name_regencies"],
+        order: [["name_regencies", "ASC"]],
+    });
 }

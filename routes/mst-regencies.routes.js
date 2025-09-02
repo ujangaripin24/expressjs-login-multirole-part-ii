@@ -17,4 +17,9 @@ router.get(
     regenciesController.getAllRegencies
 );
 
+router.get(
+    "/master/regencies/:provinceId",
+    regenciesController.getRegenciesByProvince
+)
+
 export default router;
