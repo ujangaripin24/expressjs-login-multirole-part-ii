@@ -18,7 +18,7 @@ export const uploadRegencies = async (req, res) => {
 
 export const getAllRegencies = async (req, res) => {
     try {
-        const {search} = req.query;
+        const { search } = req.query;
         const provinces = await regenciesService.getAllRegencies(search);
 
         if (!provinces || provinces.length === 0) {
@@ -36,8 +36,9 @@ export const getAllRegencies = async (req, res) => {
 
 export const getRegenciesByProvince = async (req, res) => {
     try {
-        const {provinceId} = req.params;
-        const regencies = await regenciesService.getRegenciesByProvince(provinceId);
+        const { provinceId } = req.params;
+        const { search } = req.query;
+        const regencies = await regenciesService.getRegenciesByProvince(provinceId, search);
         console.log("controller: ", provinceId)
 
         if (!regencies || regencies.length === 0) {

@@ -44,9 +44,17 @@ export const getAllRegencies = async (search) => {
   })
 }
 
-export const getRegenciesByProvince = async (provinceId) => {
+export const getRegenciesByProvince = async (provinceId, search) => {
+  const where = { id_provinces: provinceId };
+
+  if (search) {
+    where.name_regencies = {
+      [Op.iLike]: `%${search}%`
+    }
+  }
+
   return await TblMstRegencies.findAll({
-    where: { id_provinces: provinceId },
+    where,
     attributes: ["id", "id_provinces", "name_regencies"],
     order: [["name_regencies", "ASC"]],
   });
