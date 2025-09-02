@@ -736,12 +736,12 @@
 							"key": "file",
 							"type": "file",
 							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
-							"src": "/home/pratiwi24/Downloads/regencies.csv"
+							"src": "/home/pratiwi24/Downloads/districts.csv"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/regencies/upload",
+					"raw": "http://localhost:52333/api/v1/master/data/districts/upload",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -752,7 +752,7 @@
 						"v1",
 						"master",
 						"data",
-						"regencies",
+						"districts",
 						"upload"
 					]
 				}
