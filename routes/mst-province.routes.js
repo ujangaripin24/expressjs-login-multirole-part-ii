@@ -16,7 +16,6 @@ router.post(
 
 router.get(
     "/master/data/provinsi/get-all",
-    guardMiddleware,
     provinceController.getAllProvince
 );
 
