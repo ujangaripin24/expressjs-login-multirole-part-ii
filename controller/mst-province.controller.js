@@ -19,7 +19,8 @@ export const uploadProvince = async (req, res) => {
 
 export const getAllProvince = async (req, res) => {
     try {
-        const provinces = await provinceService.getAllProvinces();
+        const {search} = req.query;
+        const provinces = await provinceService.getAllProvinces(search);
 
         if (!provinces || provinces.length === 0) {
             return res.status(200).json({ errors: [{ msg: "tidak ada data" }] });
