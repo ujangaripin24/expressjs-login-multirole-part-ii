@@ -3,7 +3,7 @@ import * as regenciesService from "../service/mst-regencies.service.js"
 export const uploadRegencies = async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).json({ msg: "File CSV harus diupload" });
+            return res.status(400).json({ errors: [{ msg: "File CSV harus diupload" }] });
         }
         const result = await regenciesService.uploadRegenciesCSV(req.file.buffer);
         res.status(200).json({
@@ -40,7 +40,7 @@ export const getRegenciesByProvince = async (req, res) => {
         console.log("controller: ", provinceId)
 
         if (!regencies || regencies.length === 0) {
-            return res.status(404).json({ msg: "Tidak ada data regencies untuk provinsi ini" });
+            return res.status(404).json({ errors: [{ msg: "Tidak ada data regencies untuk provinsi ini" }] });
         }
 
         res.status(200).json({

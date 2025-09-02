@@ -20,7 +20,7 @@ router.get(
 );
 
 router.get(
-    "/master/regencies/:provinceId",
+    "/master/regencies/:provinceId/detail",
     regenciesController.getRegenciesByProvince
 )
 

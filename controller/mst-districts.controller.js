@@ -3,7 +3,7 @@ import * as districtsService from '../service/mst-districts.service.js'
 export const uploadDistricts = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ msg: "File CSV harus diupload" });
+      return res.status(400).json({ errors: [{ msg: "File CSV harus diupload" }] });
     }
     const result = await districtsService.uploadDistrictsCSV(req.file.buffer);
     res.status(200).json({
@@ -38,7 +38,7 @@ export const getDistrictsByProvince = async (req, res) => {
         const {regenciesId} = req.params;
         const districts = await districtsService.getDistrictsByRegencies(regenciesId)
         if (!districts || districts.length === 0) {
-            return res.status(404).json({ msg: "Tidak ada data regencies untuk provinsi ini" });
+            return res.status(404).json({ errors: [{ msg: "Tidak ada data regencies untuk provinsi ini" }] });
         }
         res.status(200).json({
             status: 200,

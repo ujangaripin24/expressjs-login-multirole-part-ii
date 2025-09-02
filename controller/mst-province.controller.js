@@ -3,7 +3,7 @@ import * as provinceService from "../service/mst-province.service.js"
 export const uploadProvince = async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).json({ msg: "File CSV harus diupload" });
+            return res.status(400).json({ errors: [{ msg: "File CSV harus diupload" }] });
         }
 
         const result = await provinceService.uploadProvinceCSV(req.file.buffer);
