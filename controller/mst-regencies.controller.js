@@ -18,7 +18,8 @@ export const uploadRegencies = async (req, res) => {
 
 export const getAllRegencies = async (req, res) => {
     try {
-        const provinces = await regenciesService.getAllRegencies();
+        const {search} = req.query;
+        const provinces = await regenciesService.getAllRegencies(search);
 
         if (!provinces || provinces.length === 0) {
             return res.status(200).json({ errors: [{ msg: "tidak ada data" }] });

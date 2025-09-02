@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import db from "../models/index.js";
 import { parse } from "csv-parse/sync";
 
@@ -27,8 +28,17 @@ export const uploadRegenciesCSV = async (buffer) => {
   return { count }
 }
 
-export const getAllRegencies = async () => {
+export const getAllRegencies = async (search) => {
+  let where = {}
+
+  if (search) {
+    where.name_regencies = {
+      [Op.iLike]: `%${search}%`
+    }
+  }
+
   return await TblMstRegencies.findAll({
+    where,
     attributes: ["id", "name_regencies"],
     order: [["name_regencies", "ASC"]],
   })
