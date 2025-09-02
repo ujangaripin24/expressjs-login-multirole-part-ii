@@ -719,6 +719,45 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[mst districs] upload data",
+			"id": "21807576-0ee68758-9d29-4aed-bc08-6fa21bced9af",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"uuid": "2d04abd0-2df5-4f5e-990c-eaa418dbc567",
+							"src": "/home/pratiwi24/Downloads/regencies.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"master",
+						"data",
+						"regencies",
+						"upload"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
