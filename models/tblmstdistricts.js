@@ -13,6 +13,10 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'id_regencies',
         as: 'regencies'
       });
+      TblMstDistricts.hasMany(models.TblMarketData, {
+        foreignKey: 'id_districts',
+        as: 'market_data'
+      })
     }
   }
   TblMstDistricts.init({
