@@ -9,22 +9,17 @@ export const uploadDistrictsCSV = async (buffer) => {
   const records = parse(csvString, {
     columns: true,
     skip_empty_lines: true
+  }).map(row => ({
+    id: parseInt(row.id),
+    id_regencies: parseInt(row.id_regencies),
+    name_districts: row.name_districts,
+  }))
+
+  await TblMstDistricts.bulkCreate(records, {
+    updateOnDuplicate: ['id_regencies', 'name_districts']
   })
 
-  let count = 0
-
-  await db.sequelize.transaction(async (t) => {
-    for (const row of records) {
-      const data = {
-        id: parseInt(row.id),
-        id_regencies: parseInt(row.id_regencies),
-        name_districts: row.name_districts,
-      }
-      await TblMstDistricts.upsert(data, { transaction: t })
-      count++
-    }
-  })
-  return { count }
+  return { count: records.length }
 }
 
 export const getAllDistricts = async () => {
