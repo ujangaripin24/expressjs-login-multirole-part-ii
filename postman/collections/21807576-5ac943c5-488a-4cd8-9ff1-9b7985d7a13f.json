@@ -699,7 +699,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all?search=BANDU",
+					"raw": "http://localhost:52333/api/v1/master/data/regencies/get-all?search=",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -716,7 +716,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "BANDU"
+							"value": ""
 						}
 					]
 				}
