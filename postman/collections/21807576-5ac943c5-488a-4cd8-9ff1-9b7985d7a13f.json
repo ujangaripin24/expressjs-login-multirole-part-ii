@@ -42,7 +42,7 @@
 			"response": []
 		},
 		{
-			"name": "[user] post new user  Copy",
+			"name": "[market] post new market",
 			"id": "21807576-c7996966-f532-4baf-9f79-190b287a132c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
