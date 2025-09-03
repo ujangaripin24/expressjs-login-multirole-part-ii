@@ -8,6 +8,7 @@ import './config/database.js';
 import db from './models/index.js';
 import SequelizeStore from 'connect-session-sequelize';
 import passport from './config/passport.js';
+import cors from 'cors'
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.routes.js';
@@ -32,6 +33,12 @@ const store = new sessionStore({
     checkExpirationInterval: 15 * 60 * 100,
     expiration: 1000 * 60 * 60
 })
+const corsOptions = {
+    origin: process.env.FRONTEND_ENDPOINT,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}
 
 // view engine setup
 
@@ -49,6 +56,7 @@ app.use(session({
         httpOnly: true
     }
 }))
+app.use(cors(corsOptions))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(helmet());
