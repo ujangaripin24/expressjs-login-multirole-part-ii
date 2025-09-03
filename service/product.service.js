@@ -17,7 +17,7 @@ export const getAllProduct = async({page = 1, size = 10, search = ""}) => {
     } : {};
 
     const {row, count} = await TblProduct.findAndCountAll({
-        attributes: ["name", "link_picture", "price"],
+        attributes: ["id", "name", "link_picture", "price"],
         where,
         limit,
         offset,
