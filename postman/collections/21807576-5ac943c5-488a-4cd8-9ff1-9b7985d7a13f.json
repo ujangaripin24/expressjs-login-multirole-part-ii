@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214110,\n    \"market_name\": \"Pasar Baru Jawa Barat\",\n    \"market_address\": \"Cigondewah\",\n    \"latitude\": 105.57873,\n    \"longitude\": -6.56547\n}",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214111,\n    \"market_name\": \"Pasar Baru Cimahi\",\n    \"market_address\": \"Cimahi, yudistira rt01/02\",\n    \"latitude\": 105.57863433,\n    \"longitude\": -6.56512247\n}",
 					"options": {
 						"raw": {
 							"language": "json"
