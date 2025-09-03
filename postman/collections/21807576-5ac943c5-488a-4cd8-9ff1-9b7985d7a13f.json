@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"user005\",\n    \"email\": \"user005@gmail.com\",\n    \"password\": \"123456789\",\n    \"confPassword\": \"123321231\"\n}",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214110,\n    \"market_name\": \"Pasar Bari Tapi Lama\",\n    \"market_address\": \"Bandung\",\n    \"latitude\": 105.587,\n    \"longitude\": -6.547\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +60,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/web/users/create",
+					"raw": "http://localhost:52333/api/v1/market/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,8 +69,7 @@
 					"path": [
 						"api",
 						"v1",
-						"web",
-						"users",
+						"market",
 						"create"
 					]
 				}
