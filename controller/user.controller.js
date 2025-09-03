@@ -26,7 +26,7 @@ export const GetAllUser = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         await userService.createUser(req.body);
-        res.json({ "msg": "user success created" });
+        res.json({ msg: "user success created" });
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
@@ -35,7 +35,7 @@ export const createUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         await userService.updateUser(req.params.uuid, req.body);
-        res.json({ "msg": "user success updated" });
+        res.json({ msg: "user success updated" });
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
@@ -44,7 +44,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         await userService.deleteUser(req.params.uuid);
-        res.json({ "msg": "user success deleted" });
+        res.json({ msg: "user success deleted" });
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }

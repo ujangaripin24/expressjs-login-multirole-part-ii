@@ -6,7 +6,7 @@ export const createUserValidator = [
     body('name').notEmpty().withMessage("name is required"),
     body('email')
         .isEmail()
-        .withMessage("email is required")
+        .withMessage("email is required Dune!!")
         .custom(async (value) => {
             const existingUser = await TblUser.findOne({ where: { email: value } });
             if (existingUser) {
