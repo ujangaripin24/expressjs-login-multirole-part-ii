@@ -943,7 +943,7 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -955,7 +955,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/create",
+					"raw": "http://localhost:52333/api/v1/market/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -965,7 +965,7 @@
 						"api",
 						"v1",
 						"market",
-						"create"
+						"get-all"
 					]
 				}
 			},
