@@ -956,7 +956,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/get-all",
+					"raw": "http://localhost:52333/api/v1/market/data/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -966,6 +966,7 @@
 						"api",
 						"v1",
 						"market",
+						"data",
 						"get-all"
 					]
 				}
