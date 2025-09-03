@@ -935,6 +935,41 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[market] get new market",
+			"id": "21807576-d8a47ec2-c423-4540-a6b0-2c7bf3b1f104",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214110,\n    \"market_name\": \"Pasar Bari Tapi Lama\",\n    \"market_address\": \"Bandung\",\n    \"latitude\": 105.587,\n    \"longitude\": -6.547\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/market/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"market",
+						"create"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
