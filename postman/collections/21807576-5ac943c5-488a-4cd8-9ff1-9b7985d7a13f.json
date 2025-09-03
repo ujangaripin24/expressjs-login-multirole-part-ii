@@ -956,7 +956,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/data/get-all",
+					"raw": "http://localhost:52333/api/v1/market/data/get-all?search=&page=1&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -968,6 +968,20 @@
 						"market",
 						"data",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
 					]
 				}
 			},
