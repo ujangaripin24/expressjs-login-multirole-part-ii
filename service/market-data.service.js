@@ -26,3 +26,13 @@ export const getAllMarket = async () => {
         ]
     })
 }
+
+export const updateMarket = async (id, data) => {
+    const market = await TblMarketData.findOne({
+        where: { id }
+    })
+    if (!market) throw new Error("Market not found");
+
+    await market.update(data, { where: { id: market.id } })
+    return market
+}

@@ -25,3 +25,14 @@ export const createMarket = async (req, res) => {
         res.status(500).json({ errors: [{ msg: error.message }] })
     }
 }
+
+export const updateMarket = async (req, res) => {
+    try {
+        const { id_provinces, id_regencies, id_districts, market_name, market_address, latitude, longitude } = req.body
+        const updated = await marketService.updateMarket(req.params.id, { id_provinces, id_regencies, id_districts, market_name, market_address, latitude, longitude })
+        if (!updated) return res.status(404).json({ errors: [{ msg: 'Market not found' }] })
+        res.status(200).json({ msg: 'Market Updated' })
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] })
+    }
+}
