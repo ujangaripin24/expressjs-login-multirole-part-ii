@@ -991,7 +991,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/update/1",
+					"raw": "http://localhost:52333/api/v1/market/data/update/122",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1001,8 +1001,9 @@
 						"api",
 						"v1",
 						"market",
+						"data",
 						"update",
-						"1"
+						"122"
 					]
 				}
 			},
