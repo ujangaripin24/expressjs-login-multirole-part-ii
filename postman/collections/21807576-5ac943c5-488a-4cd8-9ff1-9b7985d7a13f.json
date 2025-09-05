@@ -1073,6 +1073,56 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[market] get new market by id",
+			"id": "21807576-e619c77d-a1e0-4ec7-affa-cb782a49dc96",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214110,\n    \"market_name\": \"Pasar Bari Tapi Lama\",\n    \"market_address\": \"Bandung\",\n    \"latitude\": 105.587,\n    \"longitude\": -6.547\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/market/data/get-data-by-region?province=32&regencies=3214&districts=3214111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"market",
+						"data",
+						"get-data-by-region"
+					],
+					"query": [
+						{
+							"key": "province",
+							"value": "32"
+						},
+						{
+							"key": "regencies",
+							"value": "3214"
+						},
+						{
+							"key": "districts",
+							"value": "3214111"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
