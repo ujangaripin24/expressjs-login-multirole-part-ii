@@ -358,3 +358,50 @@ GET http://localhost:3000/api/v1/master/data/provinsi/get-all
 
 ⚡ Dengan ini module `mst-province` sudah konsisten sama dengan `product` module di aplikasi kamu.
 Mau aku bikinkan juga **migration & model Sequelize** untuk `TblMasterProvince` biar langsung bisa dipakai di service?
+
+### Unit Testing JEST
+Mantap 🎉 test kamu sudah jalan dan **semua test yang kamu tulis sudah PASS** ✅.
+
+Sekarang kita bahas report **coverage** yang muncul di bawah:
+
+---
+
+### 📊 Arti dari report coverage
+
+* **% Stmts (Statements)** → Berapa banyak pernyataan (baris kode eksekusi) yang sudah dieksekusi oleh test.
+
+  * Kamu 37.5% → artinya hanya sekitar **sepertiga baris** service kamu yang kena test.
+
+* **% Branch (Branches)** → Berapa banyak percabangan `if/else`, `try/catch`, kondisi ternary, dll.
+
+  * Kamu 14.28% → artinya sebagian besar kondisi belum dites (misalnya `if (!user)` selain yang sudah kamu test).
+
+* **% Funcs (Functions)** → Berapa banyak fungsi yang sudah dipanggil dalam test.
+
+  * Kamu 40% → berarti cuma 2 fungsi yang dites (`getUserByID`, `createUser`), sedangkan fungsi lain (`GetAllUser`, `updateUser`, `deleteUser`) belum dites.
+
+* **% Lines (Lines)** → Sama kayak `% Stmts`, tapi dihitung per-baris.
+
+* **Uncovered Line #s** → Baris mana yang belum pernah dijalankan saat testing.
+
+  * Misalnya di file kamu `11-31,45,63-81,85-91` belum pernah dieksekusi → itu bagian `GetAllUser`, `updateUser`, `deleteUser`.
+
+---
+
+### 📝 Kesimpulan
+
+* Test **berhasil** tapi **coverage masih rendah** karena kamu baru tes 2 fungsi saja.
+* Baris yang belum dites ditunjukin supaya kamu bisa tau harus bikin test tambahan di mana.
+
+---
+
+👉 Kalau targetnya cuma **memastikan fungsi kritikal jalan** → sekarang udah oke.
+👉 Kalau targetnya **coverage lebih tinggi (70–80%)** → kamu perlu nulis test tambahan untuk:
+
+* `GetAllUser` (cek search, pagination).
+* `updateUser` (update dengan password / tanpa password).
+* `deleteUser` (delete sukses & error kalau user gak ada).
+
+---
+
+Mau aku bikinkan contoh test tambahan untuk `updateUser` supaya coverage kamu naik?

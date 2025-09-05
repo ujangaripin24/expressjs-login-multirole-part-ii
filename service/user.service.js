@@ -8,8 +8,8 @@ const { TblUser } = db;
 const DEFAULT_AVATAR = process.env.DEFAULT_AVATAR;
 
 export const GetAllUser = async ({ page = 1, size = 10, search = "" }) => {
-    const limit = parseInt(size)
-    const offset = (parseInt(page) - 1) * parseInt(size)
+    const limit = parseInt(size);
+    const offset = (parseInt(page) - 1) * parseInt(size);
 
     const where = search ? {
         [Op.or]: [
@@ -38,7 +38,7 @@ export const GetAllUser = async ({ page = 1, size = 10, search = "" }) => {
 }
 
 export const getUserByID = async (uuid) => {
-    const user = await TblUser.findOne({ where: { uuid } })
+    const user = await TblUser.findOne({ where: { uuid } });
     if (!user) {
         throw new Error("User Tidak ada");
     }
@@ -60,7 +60,7 @@ export const createUser = async (data) => {
 }
 
 export const updateUser = async (uuid, payload) => {
-    const user = await TblUser.findOne({ where: { uuid } })
+    const user = await TblUser.findOne({ where: { uuid } });
     if (!user) {
         throw new Error("User Tidak ada");
     }
@@ -82,7 +82,7 @@ export const updateUser = async (uuid, payload) => {
 }
 
 export const deleteUser = async (uuid) => {
-    const user = await TblUser.findOne({ where: { uuid } })
+    const user = await TblUser.findOne({ where: { uuid } });
     if (!user) {
         throw new Error("User Tidak ada");
     }
