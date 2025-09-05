@@ -15,6 +15,7 @@ router.post('/market/data/create', guardMiddleware,createMarketValidator, (req, 
 }, marketController.createMarket)
 router.get('/market/data/get-all', marketController.getMarketData)
 router.get('/market/data/get-data-by-region', marketController.getAllMarketWithRegion)
+router.get('/market/data/detail/:id', marketController.getMarketDataByID)
 router.put('/market/data/update/:id', guardMiddleware, updateMarketValidator, (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

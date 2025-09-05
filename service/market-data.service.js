@@ -17,7 +17,7 @@ export const createMarket = async (data) => {
     return market
 }
 
-export const getAllMarket = async ({page = 1, size = 10, search = ""}) => {
+export const getAllMarket = async ({ page = 1, size = 10, search = "" }) => {
     const limit = parseInt(size)
     const offset = (parseInt(page) - 1) * parseInt(size)
 
@@ -28,7 +28,7 @@ export const getAllMarket = async ({page = 1, size = 10, search = ""}) => {
         ]
     } : {};
 
-    const { rows, count } =  await TblMarketData.findAndCountAll({
+    const { rows, count } = await TblMarketData.findAndCountAll({
         attributes: ['id', 'market_name', 'market_address', 'latitude', 'longitude'],
         include: [
             { model: TblMstDistricts, as: 'districts', attributes: ['id', 'name_districts'] },
@@ -100,3 +100,17 @@ export const getAllMarketWithRegionData = async ({ province, regencies, district
         totalData: count
     };
 };
+
+export const getDataMarketByID = async (id) => {
+    const market = await TblMarketData.findOne({
+        where: { id },
+        attributes: ['id', 'market_name', 'market_address', 'latitude', 'longitude'],
+        include: [
+            { model: TblMstDistricts, as: 'districts', attributes: ['id', 'name_districts'] },
+            { model: TblMstRegencies, as: 'regencies', attributes: ['id', 'name_regencies'] },
+            { model: TblMstProvince, as: 'provinces', attributes: ['id', 'name_provinces'] }
+        ],
+    })
+    if (!market) throw new Error("Market not found");
+    return market
+}

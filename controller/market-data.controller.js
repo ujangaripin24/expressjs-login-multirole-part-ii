@@ -70,3 +70,12 @@ export const getAllMarketWithRegion = async (req, res) => {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
 };
+
+export const getMarketDataByID = async (req, res) => {
+    try {
+        const market = await marketService.getDataMarketByID(req.params.id)
+        res.status(200).json(market)
+    } catch (error) {
+        res.status(500).json({ errors: [{ msg: error.message }] });
+    }
+}
