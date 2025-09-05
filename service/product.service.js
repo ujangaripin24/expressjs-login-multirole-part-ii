@@ -17,7 +17,7 @@ export const getAllProduct = async({page = 1, size = 10, search = ""}) => {
     } : {};
 
     const {row, count} = await TblProduct.findAndCountAll({
-        attributes: ["id", "name", "link_picture", "price"],
+        attributes: ["uuid", "name", "link_picture", "price"],
         where,
         limit,
         offset,
@@ -51,7 +51,9 @@ export const getProduct = async (role, userId) => {
 
 export const getProductById = async (uuid, role, userId) => {
     const product = await TblProduct.findOne({ where: { uuid } })
-    if (!product) return null
+    if (!product) {
+        throw new Error("Product Tidak ada");
+    }
 
     if (role === 'admin') {
         return await TblProduct.findOne({

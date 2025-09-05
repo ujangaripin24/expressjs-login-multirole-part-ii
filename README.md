@@ -405,3 +405,228 @@ Sekarang kita bahas report **coverage** yang muncul di bawah:
 ---
 
 Mau aku bikinkan contoh test tambahan untuk `updateUser` supaya coverage kamu naik?
+
+
+### fungsi perintah jest dan terjemahannya
+Oke kita bahas pelan-pelan ya 👇
+
+---
+
+### 1. `jest.mock()`
+
+📌 Fungsinya untuk **menggantikan module asli** dengan versi palsu (mock) supaya:
+
+* Kita **tidak benar-benar akses database / API eksternal** saat testing.
+* Kita bisa **kontrol output** dari fungsi module tersebut.
+
+Contoh:
+
+```js
+jest.mock('../models/index.js', () => ({
+  TblProduct: {
+    findOne: jest.fn(),
+    create: jest.fn(),
+  }
+}));
+```
+
+➡️ Artinya: setiap kali service kita manggil `TblProduct.findOne()`, Jest tidak akan manggil Sequelize beneran. Tapi pakai `jest.fn()` palsu yang bisa kita atur return value-nya.
+
+---
+
+### 2. `jest.fn()`
+
+📌 Fungsinya untuk membuat **mock function**.
+Mock function ini bisa kita kasih:
+
+* **Return value** dengan `mockReturnValue` atau `mockResolvedValue`.
+* **Spy**: cek apakah dipanggil, berapa kali, dengan argumen apa.
+
+Contoh:
+
+```js
+const mockFn = jest.fn().mockResolvedValue("hello");
+
+await mockFn(); // return "hello"
+expect(mockFn).toHaveBeenCalled(); // ✅ bisa dicek
+```
+
+---
+
+### 3. `afterEach()`
+
+📌 Hook Jest yang jalan **setelah setiap test**.
+Fungsinya untuk **bersihin state**, supaya test berikutnya tidak ketularan.
+
+Contoh:
+
+```js
+afterEach(() => {
+  jest.clearAllMocks();
+});
+```
+
+➡️ Jadi kalau ada 10 test, setelah test ke-1 selesai → hook ini dipanggil → lalu test ke-2 mulai dengan kondisi bersih.
+
+---
+
+### 4. `jest.clearAllMocks()`
+
+📌 Membersihkan semua **call history** dari `jest.fn()`.
+
+* Tidak menghapus fungsi palsu, hanya reset jumlah call & argumen.
+* Supaya kita bisa pastikan test berikutnya tidak salah hitung.
+
+Contoh:
+
+```js
+const fn = jest.fn();
+fn("a");
+expect(fn).toHaveBeenCalledTimes(1);
+
+jest.clearAllMocks();
+
+expect(fn).toHaveBeenCalledTimes(0); // sudah direset
+```
+
+---
+
+⚡️ Singkatnya:
+
+* `jest.mock` → bikin versi palsu module.
+* `jest.fn` → bikin fungsi palsu yang bisa diatur & di-spy.
+* `afterEach` → hook cleanup setelah setiap test.
+* `jest.clearAllMocks` → reset semua mock call supaya test independen.
+
+---
+
+Mantap, sekarang kita bedah bagian **dalamnya** ya 👇
+
+---
+
+### 1. `TblProduct.findAndCountAll.mockResolvedValue(...)`
+
+📌 Fungsinya adalah **mengatur return value dari fungsi mock async**.
+
+Karena `findAndCountAll` itu biasanya `async` (balik `Promise`), maka kita gunakan `mockResolvedValue`.
+
+Contoh:
+
+```js
+TblProduct.findAndCountAll.mockResolvedValue({
+  rows: [{ id: 1, name: "Produk A" }],
+  count: 1
+});
+```
+
+➡️ Jadi kalau di dalam service ada:
+
+```js
+const { rows, count } = await TblProduct.findAndCountAll();
+```
+
+maka `rows` akan berisi produk palsu yang kita set di mock, bukan hasil query DB asli.
+
+---
+
+### 2. `expect(TblProduct.findAndCountAll).toHaveBeenCalled();`
+
+📌 Fungsinya untuk **assert / memastikan** bahwa fungsi mock benar-benar dipanggil saat test jalan.
+
+Contoh:
+
+```js
+await productService.getAllProduct({ page: 1, size: 10 });
+expect(TblProduct.findAndCountAll).toHaveBeenCalled();
+```
+
+➡️ Artinya kita memastikan service benar-benar manggil `TblProduct.findAndCountAll` (query ke DB palsu).
+
+Kalau ternyata tidak dipanggil, test akan gagal → artinya ada bug di service kita (misalnya lupa return atau salah branch condition).
+
+---
+
+⚡ Jadi perannya beda:
+
+* `mockResolvedValue` → **ngatur hasil yang dikembalikan** oleh mock function.
+* `toHaveBeenCalled` → **ngecek apakah fungsi itu dipanggil** dalam eksekusi test.
+
+---
+
+Oke, kita bahas dua matcher penting di Jest: **`toThrow`** dan **`toEqual`** ✨
+
+---
+
+### 1. `toThrow`
+
+📌 Digunakan untuk **mengecek kalau sebuah function melempar error (exception)**.
+Biasanya dipakai untuk unit test yang menguji **error handling**.
+
+Contoh:
+
+```js
+function bagi(a, b) {
+  if (b === 0) throw new Error("Tidak bisa bagi 0");
+  return a / b;
+}
+
+test("error saat bagi 0", () => {
+  expect(() => bagi(10, 0)).toThrow("Tidak bisa bagi 0");
+});
+```
+
+➡️ Di sini kita pastikan fungsi `bagi` benar-benar melempar error `"Tidak bisa bagi 0"`.
+Kalau ternyata tidak ada error, test gagal.
+
+Di service kamu, misalnya:
+
+```js
+await expect(productService.getProductById("uuid-salah"))
+  .rejects
+  .toThrow("Product Tidak ada");
+```
+
+Ini ngecek kalau memang saat produk tidak ada, service **lempar error** sesuai yang kita harapkan.
+
+---
+
+### 2. `toEqual`
+
+📌 Digunakan untuk **membandingkan isi (value) dari object/array**.
+Beda dengan `toBe` yang cuma ngecek referensi (===).
+
+Contoh:
+
+```js
+const obj = { name: "Ujang", age: 25 };
+
+test("bandingkan object", () => {
+  expect(obj).toEqual({ name: "Ujang", age: 25 });
+});
+```
+
+➡️ Test ini **lulus** karena isi object sama, meskipun referensinya beda.
+
+Kalau pakai `toBe`, test bakal gagal:
+
+```js
+expect(obj).toBe({ name: "Ujang", age: 25 }); // ❌ gagal
+```
+
+karena `{...}` bikin object baru dengan referensi berbeda.
+
+---
+
+### Kapan dipakai?
+
+* **`toThrow`** → dipakai saat testing error handling (misalnya data tidak ditemukan, akses terlarang, input invalid).
+* **`toEqual`** → dipakai saat hasil fungsi mengembalikan object/array, dan kita ingin membandingkan isinya.
+
+---
+
+👉 Jadi kalau di **service test kamu**:
+
+* `toThrow` dipakai di test *"handle error jika produk tidak ditemukan"*.
+* `toEqual` dipakai di test *"membuat produk baru"* (karena hasil create adalah object).
+
+---
