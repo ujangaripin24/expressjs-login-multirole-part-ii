@@ -107,6 +107,7 @@ export const getDataMarketByID = async (id) => {
         where: { id },
         attributes: ['id', 'market_name', 'market_address', 'latitude', 'longitude'],
         include: [
+            { model: TblMarketProduct, as: 'market_data_product', attributes: ['name_product', 'price'] },
             { model: TblMstDistricts, as: 'districts', attributes: ['id', 'name_districts'] },
             { model: TblMstRegencies, as: 'regencies', attributes: ['id', 'name_regencies'] },
             { model: TblMstProvince, as: 'provinces', attributes: ['id', 'name_provinces'] }
