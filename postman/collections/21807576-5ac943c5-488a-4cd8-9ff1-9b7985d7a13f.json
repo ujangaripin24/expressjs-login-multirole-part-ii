@@ -1122,7 +1122,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214111,\n    \"market_name\": \"Pasar Baru Cimahi\",\n    \"market_address\": \"Cimahi, yudistira rt01/02\",\n    \"latitude\": 105.57863433,\n    \"longitude\": -6.56512247\n}",
+					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 1\",\n    \"price\": 5000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1130,7 +1130,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/data/create",
+					"raw": "http://localhost:52333/api/v1/market/product/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1140,7 +1140,7 @@
 						"api",
 						"v1",
 						"market",
-						"data",
+						"product",
 						"create"
 					]
 				}
