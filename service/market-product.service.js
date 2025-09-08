@@ -12,17 +12,29 @@ export const createMarketProduct = async (data) => {
     return marketProduct
 }
 
-export const getAllMarketProduct = async (id_market) => {
-    const market = await TblMarketData.findOne({
-        where: { id: id_market }
-    })
-    if (!market) throw new Error("Market not found");
-    const marketProduct = await TblMarketProduct.findAll({
-        attributes: ['id', 'name_product', 'price'],
-        include: [
-            { model: TblMarketData, as: 'market_data_product', attributes: ['id', 'market_name']},
-        ],
-        where: { id_market }
-    })
-    return marketProduct
-}
+export const getProductStatistics = async ({ province, regencies, districts }) => {
+  const where = {};
+  if (province) where.id_provinces = province;
+  if (regencies) where.id_regencies = regencies;
+  if (districts) where.id_districts = districts;
+
+  const stats = await TblMarketProduct.findAll({
+    attributes: [
+      'name_product',
+      [db.sequelize.fn('AVG', db.sequelize.col('price')), 'avg_price']
+    ],
+    include: [
+      {
+        model: TblMarketData,
+        as: 'market_data_product',
+        attributes: [],
+        where
+      }
+    ],
+    group: ['name_product'],
+    order: [[db.sequelize.literal('avg_price'), 'DESC']],
+    limit: 10
+  });
+
+  return stats;
+};

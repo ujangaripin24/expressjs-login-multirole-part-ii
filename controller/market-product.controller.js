@@ -9,11 +9,15 @@ export const createMarketProduct = async (req, res) => {
     }
 }
 
-export const getAllMarketProduct = async (req, res) => {
+export const getDataProductStatistics = async (req, res) => {
     try {
-        const marketProduct = await marketProductService.getAllMarketProduct(req.params.id_market)
-        res.status(200).json(marketProduct)
+        const { province, regencies, districts } = req.query;
+        const result = await marketProductService.getProductStatistics({ province, regencies, districts });
+        if (!result || result.length === 0) {
+            return res.status(200).json({ errors: [{ msg: "tidak ada data" }] });
+        }
+        res.status(200).json({ status: 200, data: result });
     } catch (error) {
-        res.status(500).json({ errors: [{ msg: error.message }] })
+        res.status(500).json({ errors: [{ msg: error.message }] });
     }
 }
