@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
       // define association here
       TblMarketProduct.belongsTo(models.TblMarketData, {
         foreignKey: 'id_market',
-        as: 'market_data'
+        as: 'market_data_product'
       })
     }
   }

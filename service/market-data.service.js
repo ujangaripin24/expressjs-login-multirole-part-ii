@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import db from '../models/index.js'
 
-const { TblMarketData, TblMstDistricts, TblMstRegencies, TblMstProvince } = db;
+const { TblMarketData, TblMstDistricts, TblMstRegencies, TblMstProvince, TblMarketProduct } = db;
 
 export const createMarket = async (data) => {
     const { id_provinces, id_regencies, id_districts, market_name, market_address, latitude, longitude } = data
@@ -31,6 +31,7 @@ export const getAllMarket = async ({ page = 1, size = 10, search = "" }) => {
     const { rows, count } = await TblMarketData.findAndCountAll({
         attributes: ['id', 'market_name', 'market_address', 'latitude', 'longitude'],
         include: [
+            { model: TblMarketProduct, as: 'market_data_product', attributes: ['name_product', 'price'] },
             { model: TblMstDistricts, as: 'districts', attributes: ['id', 'name_districts'] },
             { model: TblMstRegencies, as: 'regencies', attributes: ['id', 'name_regencies'] },
             { model: TblMstProvince, as: 'provinces', attributes: ['id', 'name_provinces'] }
@@ -116,7 +117,7 @@ export const getDataMarketByID = async (id) => {
 }
 
 export const deleteMarket = async (id) => {
-        const market = await TblMarketData.findOne({
+    const market = await TblMarketData.findOne({
         where: { id }
     })
     if (!market) throw new Error("Market not found");
