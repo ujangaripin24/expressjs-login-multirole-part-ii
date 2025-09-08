@@ -1146,6 +1146,42 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[market product] get market product",
+			"id": "21807576-be5b94fa-e3bd-4c12-bfb4-b62892dc2f9f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 3\",\n    \"price\": 21000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/market/product/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"market",
+						"product",
+						"create"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
