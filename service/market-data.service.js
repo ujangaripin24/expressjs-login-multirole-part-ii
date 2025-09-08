@@ -17,7 +17,7 @@ export const createMarket = async (data) => {
     return market
 }
 
-export const getAllMarket = async ({ page = 1, size = 10, search = "" }) => {
+export const getAllMarket = async ({ page = 1, size = 10, search = "", province, regencies, districts }) => {
     const limit = parseInt(size)
     const offset = (parseInt(page) - 1) * parseInt(size)
 
@@ -27,6 +27,16 @@ export const getAllMarket = async ({ page = 1, size = 10, search = "" }) => {
             { market_address: { [Op.like]: `%${search}%` } }
         ]
     } : {};
+
+    if (province) {
+        where.id_provinces = province;
+    }
+    if (regencies) {
+        where.id_regencies = regencies;
+    }
+    if (districts) {
+        where.id_districts = districts;
+    }
 
     const { rows, count } = await TblMarketData.findAndCountAll({
         attributes: ['id', 'market_name', 'market_address', 'latitude', 'longitude'],

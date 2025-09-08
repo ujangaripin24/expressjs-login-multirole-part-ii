@@ -2,9 +2,16 @@ import * as marketService from '../service/market-data.service.js'
 
 export const getMarketData = async (req, res) => {
     try {
-        const { page, size, search } = req.query;
+        const { page, size, search, province, regencies, districts } = req.query;
 
-        const result = await marketService.getAllMarket({ page, size, search });
+        const result = await marketService.getAllMarket({ 
+            page,
+            size,
+            search,
+            province,
+            regencies,
+            districts
+        });
 
         if (!result.data || result.data.length === 0) {
             return res.status(200).json({ errors: [{ msg: "tidak ada data" }] });
