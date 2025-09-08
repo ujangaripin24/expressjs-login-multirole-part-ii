@@ -1093,7 +1093,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/data/get-data-by-region?province=32&regencies=3214&districts=3214111",
+					"raw": "http://localhost:52333/api/v1/market/data/detail/18",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1104,21 +1104,8 @@
 						"v1",
 						"market",
 						"data",
-						"get-data-by-region"
-					],
-					"query": [
-						{
-							"key": "province",
-							"value": "32"
-						},
-						{
-							"key": "regencies",
-							"value": "3214"
-						},
-						{
-							"key": "districts",
-							"value": "3214111"
-						}
+						"detail",
+						"18"
 					]
 				}
 			},
