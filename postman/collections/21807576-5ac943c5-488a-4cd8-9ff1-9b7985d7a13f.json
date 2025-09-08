@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214111,\n    \"market_name\": \"Pasar Baru Cimahi\",\n    \"market_address\": \"Cimahi, yudistira rt01/02\",\n    \"latitude\": 105.57863433,\n    \"longitude\": -6.56512247\n}",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214101,\n    \"market_name\": \"Pasar Baru Cigondewah SArung\",\n    \"market_address\": \"Cigondewah kale\",\n    \"latitude\":  -6.914744,\n    \"longitude\": 107.609810\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -956,7 +956,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/data/get-all?search=&page=1&size=10",
+					"raw": "http://localhost:52333/api/v1/market/data/get-all?search=Cimahi&page=1&size=10&province=32&regencies=3214&districts=3214111",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -972,7 +972,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": ""
+							"value": "Cimahi"
 						},
 						{
 							"key": "page",
@@ -981,6 +981,18 @@
 						{
 							"key": "size",
 							"value": "10"
+						},
+						{
+							"key": "province",
+							"value": "32"
+						},
+						{
+							"key": "regencies",
+							"value": "3214"
+						},
+						{
+							"key": "districts",
+							"value": "3214111"
 						}
 					]
 				}
@@ -1122,7 +1134,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 3\",\n    \"price\": 21000\n}",
+					"raw": "{\n    \"id_market\": 20,\n    \"name_product\": \"Produk 1\",\n    \"price\": 10500\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1142,6 +1154,56 @@
 						"market",
 						"product",
 						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[market product] get market product",
+			"id": "21807576-be5b94fa-e3bd-4c12-bfb4-b62892dc2f9f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 3\",\n    \"price\": 21000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:52333/api/v1/market/product/get-all?province=32&regencies=3214&districts=3214113",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52333",
+					"path": [
+						"api",
+						"v1",
+						"market",
+						"product",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "province",
+							"value": "32"
+						},
+						{
+							"key": "regencies",
+							"value": "3214"
+						},
+						{
+							"key": "districts",
+							"value": "3214113"
+						}
 					]
 				}
 			},
