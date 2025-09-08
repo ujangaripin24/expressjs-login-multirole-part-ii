@@ -1122,7 +1122,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 1\",\n    \"price\": 5000\n}",
+					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 3\",\n    \"price\": 21000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
