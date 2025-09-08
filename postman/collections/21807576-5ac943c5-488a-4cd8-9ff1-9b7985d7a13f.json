@@ -867,7 +867,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/districts/3271/detail?search=ABELI",
+					"raw": "http://localhost:52333/api/v1/master/data/districts/3214/detail",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -879,14 +879,8 @@
 						"master",
 						"data",
 						"districts",
-						"3271",
+						"3214",
 						"detail"
-					],
-					"query": [
-						{
-							"key": "search",
-							"value": "ABELI"
-						}
 					]
 				}
 			},
@@ -1134,7 +1128,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_market\": 20,\n    \"name_product\": \"Produk 1\",\n    \"price\": 10500\n}",
+					"raw": "{\n    \"id_market\": 20,\n    \"name_product\": \"Produk 6\",\n    \"price\": 15000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1178,7 +1172,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/product/get-all?province=32&regencies=3214&districts=3214113",
+					"raw": "http://localhost:52333/api/v1/market/product/get-all?province=32",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1195,14 +1189,6 @@
 						{
 							"key": "province",
 							"value": "32"
-						},
-						{
-							"key": "regencies",
-							"value": "3214"
-						},
-						{
-							"key": "districts",
-							"value": "3214113"
 						}
 					]
 				}
