@@ -24,6 +24,11 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'id_districts',
         as: 'districts'
       })
+      // relaseo table produk pasar
+      TblMarketData.hasMany(models.TblMarketProduct, {
+        foreignKey: 'id_market',
+        as: 'market_product'
+      })
     }
   }
   TblMarketData.init({

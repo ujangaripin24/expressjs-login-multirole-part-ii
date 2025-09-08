@@ -114,3 +114,13 @@ export const getDataMarketByID = async (id) => {
     if (!market) throw new Error("Market not found");
     return market
 }
+
+export const deleteMarket = async (id) => {
+        const market = await TblMarketData.findOne({
+        where: { id }
+    })
+    if (!market) throw new Error("Market not found");
+
+    await market.destroy({ where: { id: market.id } })
+    return market
+}

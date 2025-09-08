@@ -24,5 +24,6 @@ router.put('/market/data/update/:id', guardMiddleware, updateMarketValidator, (r
         next()
     }
 }, marketController.updateMarket)
+router.delete('/market/data/delete/:id', guardMiddleware, marketController.deleteMarket)
 
 export default router;
