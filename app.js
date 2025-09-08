@@ -18,6 +18,7 @@ import mstProvinceRouter from './routes/mst-province.routes.js'
 import mstRegenciesRouter from './routes/mst-regencies.routes.js'
 import mstDistrictsRouter from './routes/mst-districts.routes.js'
 import marketRouter from './routes/market-data.routes.js'
+import marketProductRouter from './routes/market-product.routes.js'
 
 import * as path from "node:path";
 import session from 'express-session';
@@ -73,6 +74,7 @@ app.use('/api/v1/', mstProvinceRouter);
 app.use('/api/v1/', mstRegenciesRouter);
 app.use('/api/v1/', mstDistrictsRouter);
 app.use('/api/v1/', marketRouter)
+app.use('/api/v1/', marketProductRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
