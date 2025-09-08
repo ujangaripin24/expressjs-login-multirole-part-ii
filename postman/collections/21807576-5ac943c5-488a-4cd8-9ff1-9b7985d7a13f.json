@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214111,\n    \"market_name\": \"Pasar Baru Cimahi\",\n    \"market_address\": \"Cimahi, yudistira rt01/02\",\n    \"latitude\": 105.57863433,\n    \"longitude\": -6.56512247\n}",
+					"raw": "{\n    \"id_provinces\": 32,\n    \"id_regencies\": 3214,\n    \"id_districts\": 3214101,\n    \"market_name\": \"Pasar Baru Cigondewah SArung\",\n    \"market_address\": \"Cigondewah kale\",\n    \"latitude\":  -6.914744,\n    \"longitude\": 107.609810\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1134,7 +1134,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_market\": 19,\n    \"name_product\": \"Produk 3\",\n    \"price\": 21000\n}",
+					"raw": "{\n    \"id_market\": 20,\n    \"name_product\": \"Produk 1\",\n    \"price\": 10500\n}",
 					"options": {
 						"raw": {
 							"language": "json"
