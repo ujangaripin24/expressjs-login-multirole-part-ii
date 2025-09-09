@@ -8,7 +8,7 @@ export const options = {
         { duration: "20s", target: 50 },   // lalu naik ke 50 user
         { duration: "20s", target: 100 },  // lalu naik ke 100 user
         { duration: "20s", target: 200 },  // lalu naik ke 200 user
-        { duration: "20s", target: 400 },    // turun kembali (graceful stop)
+        { duration: "20s", target: 400 },  // turun kembali (graceful stop)
     ]
 }
 export default function () {

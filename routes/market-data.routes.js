@@ -3,6 +3,7 @@ import * as marketController from '../controller/market-data.controller.js'
 import { createMarketValidator, updateMarketValidator } from "../validator/market.validator.js";
 import { validationResult } from "express-validator";
 import { guardMiddleware } from "../middleware/auth.middleware.js";
+import { rateLimiter } from "../middleware/rate-limit.middleware.js";
 const router = express.Router()
 
 router.post('/market/data/create', guardMiddleware, createMarketValidator, (req, res, next) => {
