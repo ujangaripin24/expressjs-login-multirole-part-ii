@@ -1,5 +1,5 @@
-import * as userService from '../service/user.service.js';
-import db from '../models/index.js';
+import * as userService from '../../service/user.service.js';
+import db from '../../models/index.js';
 import argon2 from 'argon2';
 
 jest.mock('../models/index.js', () => ({

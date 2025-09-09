@@ -1,5 +1,5 @@
-import * as productService from '../service/product.service.js'
-import db from '../models/index.js'
+import * as productService from '../../service/product.service.js'
+import db from '../../models/index.js'
 
 jest.mock('../models/index.js', () => ({
     TblProduct: {

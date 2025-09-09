@@ -769,3 +769,141 @@ export default function () {
 
 Mau aku tambahkan versi kode yang lebih lengkap dengan **output log sederhana** (misalnya print status & response time tiap request), biar kamu bisa lihat data realtime selain laporan k6?
 
+### Hasil Performance Testing
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: market-product.test.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 1m30s max duration (incl. graceful stop):
+              * default: 100 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 2536    40.573795/s
+    checks_succeeded...: 100.00% 2536 out of 2536
+    checks_failed......: 0.00%   0 out of 2536
+
+    ✓ status is 200
+    ✓ response not empty
+
+    HTTP
+    http_req_duration..............: avg=3.85s min=1.53s med=2.62s max=18.46s p(90)=3.34s p(95)=17.55s
+      { expected_response:true }...: avg=3.85s min=1.53s med=2.62s max=18.46s p(90)=3.34s p(95)=17.55s
+    http_req_failed................: 0.00%  0 out of 1268
+    http_reqs......................: 1268   20.286898/s
+
+    EXECUTION
+    iteration_duration.............: avg=4.85s min=2.53s med=3.62s max=19.46s p(90)=4.34s p(95)=18.56s
+    iterations.....................: 1268   20.286898/s
+    vus............................: 37     min=37        max=100
+    vus_max........................: 100    min=100       max=100
+
+    NETWORK
+    data_received..................: 1.9 MB 31 kB/s
+    data_sent......................: 127 kB 2.0 kB/s
+
+
+
+
+running (1m02.5s), 000/100 VUs, 1268 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  1m0s
+
+🔥 Mantap, tes pertama dengan 100 VU selama 60 detik sudah jalan! Mari kita analisis hasilnya biar jelas apa artinya:
+
+---
+
+## 📊 Hasil Penting dari Output
+
+### ✅ Checks
+
+```
+checks_total.......: 2536
+checks_succeeded...: 100.00%
+checks_failed......: 0.00%
+```
+
+* Semua request validasi **status 200** & **response tidak kosong** → **mantap, tidak ada error**.
+
+---
+
+### 🌐 HTTP
+
+```
+http_req_duration..............: avg=3.85s min=1.53s med=2.62s max=18.46s 
+p(90)=3.34s p(95)=17.55s
+http_reqs......................: 1268   20.28/s
+```
+
+* **avg=3.85s** → rata-rata satu request butuh hampir **4 detik**.
+* **p(90)=3.34s** → 90% request selesai di bawah 3.34 detik.
+* **p(95)=17.55s** → ada 5% request yang **sangat lambat** (sampai 17 detik!).
+* **1268 request total** dalam 1 menit → sekitar **20 request per detik**.
+
+👉 Artinya: sistem masih sanggup handle 100 user, tapi ada **tail latency tinggi** (beberapa request sangat lambat).
+
+---
+
+### ⚙️ Iterasi
+
+```
+iterations.....................: 1268   20.28/s
+```
+
+* Selama 60 detik, setiap VU tidak bisa loop terlalu cepat karena request cukup berat.
+* Itulah kenapa hanya ada **1268 iterasi total** (bukan ribuan).
+
+---
+
+### 📡 Network
+
+```
+data_received..................: 1.9 MB
+data_sent......................: 127 kB
+```
+
+* Data per request tidak besar (hanya sekitar 1.5 KB response rata-rata).
+* Jadi bottleneck bukan di payload size, tapi kemungkinan di **query DB atau logic backend**.
+
+---
+
+## 🔎 Analisis
+
+* **Good news** → Tidak ada error (0% failed).
+* **Bad news** → Rata-rata response cukup lambat (4 detik itu **buruk** menurut standar Lighthouse / UX).
+* **Worst case** → Beberapa request sampai 17–18 detik → ini serius, bisa bikin user kabur.
+
+---
+
+## 🎯 Next Steps
+
+1. **Cek Query Backend**
+
+   * Endpoint `/market/product/get-all` mungkin ambil data tanpa pagination.
+   * Kalau tabel produk besar, querynya bisa berat → tambahkan **pagination (limit, offset)**.
+
+2. **Cek Index Database**
+
+   * Pastikan ada index di kolom yang sering dipakai (misalnya `id_market`, `name_product`).
+
+3. **Tambahkan Caching**
+
+   * Jika data jarang berubah, bisa pakai caching (Redis, in-memory).
+
+4. **Naikkan Beban Bertahap**
+
+   * Coba stage test: 10 → 50 → 100 → 200 user, lihat kapan sistem mulai melambat.
+
+---
+
+⚡ Jadi jawaban singkat: **backend kamu sudah stabil (no error), tapi lambat untuk skala besar karena rata-rata response time 4 detik, dengan beberapa outlier sampai 17 detik.**
+
+Mau aku bikinkan **versi stress test** pakai `stages` (naik dari 10 → 200 VU) biar ketahuan titik jebolnya server?
