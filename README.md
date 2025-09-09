@@ -630,3 +630,142 @@ karena `{...}` bikin object baru dengan referensi berbeda.
 * `toEqual` dipakai di test *"membuat produk baru"* (karena hasil create adalah object).
 
 ---
+
+Mantap 🚀 k6 pas banget buat ukur **performance & load testing** API.
+Nah, kalau pertanyaannya **endpoint mana yang wajib dites dengan k6** → jawabannya tergantung critical flow aplikasi kamu.
+
+---
+
+## 📌 Prinsip Umum
+
+Tidak semua endpoint perlu dites. Prioritaskan endpoint yang:
+
+1. **Paling sering dipanggil user** → misalnya `GET /products`, `GET /markets`.
+2. **Critical untuk bisnis** → `POST /login`, `POST /checkout`.
+3. **Paling berat di server** → query database besar, agregasi statistik.
+4. **Rentan bottleneck** → upload file (CSV, gambar), report generator.
+
+---
+
+## 🔎 Endpoint Kandidat
+
+### 1. **GET (Read)**
+
+* Biasanya paling sering dipanggil user.
+* Contoh: `GET /products`, `GET /markets/:id`, `GET /province/:id/regencies`.
+* Wajib dites untuk **throughput (req/sec)** → bisa berapa request paralel tanpa melambat?
+
+### 2. **POST (Create)**
+
+* Contoh: `POST /login`, `POST /register`, `POST /order`.
+* Penting kalau itu bagian dari alur bisnis utama.
+* Wajib dites untuk **concurrency** → apa yang terjadi kalau 100 user login/register bersamaan?
+
+### 3. **PUT/PATCH (Update)**
+
+* Biasanya jarang dibanding `GET`, tapi kalau ada **alur bisnis penting** (misalnya `PUT /checkout/:id/pay`) → wajib.
+* Fokus pada **data consistency** saat banyak user update bersamaan.
+
+### 4. **DELETE (Delete)**
+
+* Jarang dipanggil user biasa.
+* Bisa dites kalau memang ada proses penting (misalnya `DELETE /cart/:id`).
+* Tapi umumnya **tidak prioritas** di performance testing, kecuali delete memicu proses berat (cascade delete ribuan record).
+
+---
+
+## ⚡️ Jawaban Praktis
+
+* **Wajib k6 test**:
+
+  * `GET` endpoint yang high traffic (list, detail).
+  * `POST` endpoint yang critical (login, checkout, upload CSV).
+* **Opsional**: `PUT` & `DELETE`, kecuali mereka bagian alur inti atau memicu proses berat.
+
+---
+
+## 🎯 Saran Workflow k6
+
+1. **Smoke test** → pastikan semua endpoint bisa handle load kecil.
+2. **Load test** (normal traffic) → misalnya 100 user aktif.
+3. **Stress test** → dorong hingga sistem mulai melambat, cari breaking point.
+4. **Soak test** → jalankan traffic sedang tapi lama (misalnya 2 jam) untuk cek memory leak.
+
+---
+
+Siap 👍 mari kita bedah baris demi baris kode `get-all-products.test.js` supaya jelas fungsi masing-masing 👇
+
+---
+
+```javascript
+import http from "k6/http";
+import { check, sleep } from "k6";
+```
+
+* `http` → modul bawaan k6 untuk kirim request (`http.get`, `http.post`, dll).
+* `check` → helper untuk validasi hasil response (mirip assertion di testing biasa).
+* `sleep` → kasih jeda antar request, biar simulasi user lebih realistis (user nggak spam request tiap milidetik).
+
+---
+
+```javascript
+export const options = {
+  vus: 10, // Virtual Users
+  duration: "30s", // Jalankan selama 30 detik
+};
+```
+
+* `options` → konfigurasi test.
+* `vus: 10` → k6 akan mensimulasikan **10 user virtual** (VU) secara paralel.
+* `duration: "30s"` → test jalan selama **30 detik penuh**.
+  👉 Artinya: selama 30 detik, ada 10 user yang terus-menerus memanggil endpoint.
+
+---
+
+```javascript
+export default function () {
+  const res = http.get("http://localhost:3000/market/product/get-all");
+```
+
+* `export default function () { ... }` → fungsi utama yang dijalankan oleh setiap virtual user.
+* `http.get(...)` → memanggil endpoint `GET /market/product/get-all`.
+* `res` → object response yang punya property `status`, `body`, `headers`, dll.
+
+---
+
+```javascript
+  check(res, {
+    "status is 200": (r) => r.status === 200,
+    "response not empty": (r) => r.body.length > 0,
+  });
+```
+
+* `check(res, {...})` → validasi hasil response.
+* `"status is 200": (r) => r.status === 200` → pastikan response status = **200 OK**.
+* `"response not empty": (r) => r.body.length > 0` → pastikan body tidak kosong (berarti ada data produk).
+  👉 Kalau salah satu gagal → akan dicatat sebagai **failed check** di laporan k6.
+
+---
+
+```javascript
+  sleep(1); // istirahat 1 detik tiap user virtual
+}
+```
+
+* `sleep(1)` → simulasi bahwa user **menunggu 1 detik** sebelum melakukan request berikutnya.
+* Kalau tidak pakai `sleep`, maka VU akan spam request secepat CPU bisa, yang **tidak realistis** untuk simulasi user normal.
+
+---
+
+## 🔑 Ringkasannya:
+
+* `import` → ambil modul bawaan k6.
+* `options` → set jumlah user & lama test.
+* `http.get` → request ke API.
+* `check` → validasi hasil (status & body).
+* `sleep(1)` → biar test lebih realistis, seperti user beneran.
+
+---
+
+Mau aku tambahkan versi kode yang lebih lengkap dengan **output log sederhana** (misalnya print status & response time tiap request), biar kamu bisa lihat data realtime selain laporan k6?
+
