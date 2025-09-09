@@ -907,3 +907,191 @@ data_sent......................: 127 kB
 ⚡ Jadi jawaban singkat: **backend kamu sudah stabil (no error), tapi lambat untuk skala besar karena rata-rata response time 4 detik, dengan beberapa outlier sampai 17 detik.**
 
 Mau aku bikinkan **versi stress test** pakai `stages` (naik dari 10 → 200 VU) biar ketahuan titik jebolnya server?
+
+Mantap 👍 mari kita bedah laporan **k6 output** yang kamu lihat:
+
+---
+
+# 🟢 1. **TOTAL RESULTS**
+
+```
+checks_total.......: 2536
+checks_succeeded...: 100.00% 2536 out of 2536
+checks_failed......: 0.00%   0 out of 2536
+```
+
+* **checks\_total** → jumlah semua `check(...)` yang dijalankan.
+
+  * Di script kita ada 2 check (`status is 200` dan `response not empty`).
+  * Jadi setiap request = 2 check.
+  * 1268 request × 2 check = 2536 total checks.
+
+* **checks\_succeeded** → berapa banyak check yang berhasil (✅).
+
+* **checks\_failed** → berapa yang gagal (❌).
+  👉 Ini lebih ke validasi *kualitas respons*, bukan performa.
+
+---
+
+# 🔵 2. **HTTP**
+
+```
+http_req_duration..............: avg=3.85s min=1.53s med=2.62s max=18.46s p(90)=3.34s p(95)=17.55s
+http_req_failed................: 0.00%  0 out of 1268
+http_reqs......................: 1268   20.28/s
+```
+
+* **http\_req\_duration** → waktu total untuk 1 request HTTP (dari kirim → terima respons penuh).
+
+  * **avg** = rata-rata semua request.
+  * **min** / **max** = tercepat & terlambat.
+  * **med** (median) = nilai tengah → lebih representatif dari avg.
+  * **p(90)/p(95)** = persentil → contoh `p(90)=3.34s` artinya **90% request selesai ≤ 3.34 detik**.
+
+* **http\_req\_failed** → persentase request yang gagal (status error / timeout).
+
+  * Bagusnya 0% ✅
+
+* **http\_reqs** → total request HTTP yang berhasil dieksekusi selama test.
+
+  * 1268 total request dalam 60 detik ≈ 20 request/detik.
+
+👉 Bagian ini paling penting untuk analisis performa API.
+
+---
+
+# 🟠 3. **EXECUTION**
+
+```
+iteration_duration.............: avg=4.85s min=2.53s med=3.62s max=19.46s p(90)=4.34s p(95)=18.56s
+iterations.....................: 1268   20.28/s
+vus............................: 37     min=37        max=100
+vus_max........................: 100    min=100       max=100
+```
+
+* **iteration\_duration** → lama waktu eksekusi 1 iterasi (fungsi `default` dari awal sampai `sleep()`).
+
+  * Jadi bukan cuma request, tapi juga waktu `sleep(1)` dihitung di sini.
+* **iterations** → total berapa kali `default function` dijalankan (sama dengan jumlah request GET, karena tiap iterasi = 1 request).
+* **vus** → jumlah Virtual Users yang sedang aktif saat itu (37 berarti saat akhir test hanya 37 VU yang masih jalan).
+* **vus\_max** → jumlah maksimal VU yang dipakai sesuai `options`.
+
+👉 Ini lebih ke **simulasi user**, bukan performa API langsung.
+
+---
+
+# 🟣 4. **NETWORK**
+
+```
+data_received..................: 1.9 MB 31 kB/s
+data_sent......................: 127 kB 2.0 kB/s
+```
+
+* **data\_received** → total ukuran data yang diterima client selama tes.
+
+  * 1.9 MB selama 60 detik ≈ 31 kB/s.
+* **data\_sent** → total ukuran data yang dikirim ke server (request body + headers).
+
+  * 127 KB selama 60 detik ≈ 2 kB/s.
+
+👉 Dari sini bisa ketahuan apakah bottleneck karena payload besar (misalnya gambar/json gede) atau tidak.
+
+---
+
+## ✨ Ringkasan Sederhana
+
+* **TOTAL RESULTS** → validasi pass/fail.
+* **HTTP** → metrik performa request (latency, error rate, throughput).
+* **EXECUTION** → berapa banyak user & iterasi yang dijalankan.
+* **NETWORK** → seberapa besar data yang dikirim/diterima.
+
+---
+
+Kalau kamu mau, aku bisa bikin **versi tabel ringkas** untuk tiap metrik (dengan arti & kenapa penting) biar gampang jadi cheat sheet pas baca hasil k6. Mau aku bikinin?
+Oke siap 💯, aku bikinkan **cheat sheet tabel metrik k6** biar gampang kamu baca setiap kali lihat hasil test:
+
+---
+
+# 📌 Cheat Sheet: Membaca Hasil k6
+
+| Bagian            | Metrik               | Arti                                                | Kenapa Penting                                |
+| ----------------- | -------------------- | --------------------------------------------------- | --------------------------------------------- |
+| **TOTAL RESULTS** | `checks_total`       | Jumlah total validasi (check) yang dijalankan       | Pastikan test benar-benar memvalidasi respons |
+|                   | `checks_succeeded`   | Jumlah check yang lulus ✅                           | Kalau gagal → respons API tidak sesuai        |
+|                   | `checks_failed`      | Jumlah check gagal ❌                                | Indikasi bug atau error di API                |
+| **HTTP**          | `http_req_duration`  | Lama request HTTP (dari kirim sampai respons penuh) | Core metrik performa API                      |
+|                   | `avg`                | Rata-rata durasi request                            | Gambaran umum kecepatan API                   |
+|                   | `min` / `max`        | Waktu tercepat & terlambat                          | Lihat outlier (request ekstrem)               |
+|                   | `med` (median)       | Nilai tengah durasi                                 | Lebih representatif dari rata-rata            |
+|                   | `p(90)` / `p(95)`    | Persentil → 90%/95% request selesai ≤ waktu ini     | Metrik penting untuk UX (tail latency)        |
+|                   | `http_req_failed`    | Persentase request yang gagal (error/timeout)       | Idealnya 0%                                   |
+|                   | `http_reqs`          | Total request selama test                           | Dipakai untuk hitung throughput (req/s)       |
+| **EXECUTION**     | `iteration_duration` | Lama 1 iterasi (termasuk request + sleep)           | Gambaran kecepatan siklus tiap VU             |
+|                   | `iterations`         | Total iterasi (loop default function)               | Biasanya = jumlah request                     |
+|                   | `vus`                | Virtual users aktif saat itu                        | Lihat apakah stabil sesuai target             |
+|                   | `vus_max`            | Jumlah maksimum VU sesuai config                    | Konfirmasi skenario test                      |
+| **NETWORK**       | `data_received`      | Total data yang diterima client                     | Bisa cek apakah payload terlalu besar         |
+|                   | `data_sent`          | Total data yang dikirim ke server                   | Berguna kalau ada upload besar (CSV, gambar)  |
+
+---
+
+## 🎯 Cara Membacanya
+
+1. **Lihat `http_req_failed` dulu** → kalau ada error, fix dulu bug/server.
+2. **Cek `http_req_duration` (avg, median, p95)** → apakah masih <1 detik (ideal) atau sudah >3 detik (lambat).
+3. **Lihat `http_reqs` / `iterations`** → throughput server, bisa handle berapa req/s.
+4. **Pantau `vus`** → apakah semua user aktif, atau ada yang drop.
+5. **Cek `network`** → pastikan data tidak terlalu besar (jangan kirim MB besar tiap request).
+
+---
+
+Mau aku bikinkan juga **versi visual (diagram alur cara baca hasil k6)** biar lebih cepat dicerna saat lihat output?
+
+Yes betul ✅
+
+Kalau `checks_failed: 0.00%` → artinya semua request sukses (status 200 + response sesuai check) **belum ada tanda server kewalahan**. Itu berarti **titik jebol belum ketemu**.
+
+---
+
+### ⚡ Cara Mendorong Server Sampai Ketahuan "Jebol":
+
+1. **Naikkan Target User (VU)**
+
+   * Kalau sebelumnya max 100 → coba 200, 300, 500, bahkan 1000 (tergantung kapasitas server).
+   * Makin banyak VU, makin besar concurrency pressure.
+
+2. **Percepat Waktu Ramp-Up (Duration Pendek)**
+
+   * Kalau kamu kasih `duration: "60s"` untuk 100 user → server masih punya waktu adaptasi (misalnya DB pool masih sempat menangani).
+   * Kalau dipersempit (misalnya 10s untuk naik ke 200 user) → jadi semacam **spike test** → biasanya lebih gampang jebol.
+
+3. **Kombinasikan `stages`**
+
+   * Naik bertahap → lihat di titik mana latency (p95) atau error mulai naik.
+   * Contoh:
+
+     ```js
+     stages: [
+       { duration: "20s", target: 50 },
+       { duration: "20s", target: 100 },
+       { duration: "20s", target: 200 },
+       { duration: "20s", target: 400 }, // mungkin mulai kelihatan bottleneck
+     ]
+     ```
+
+4. **Amati Metrik**
+
+   * `http_req_duration p(95)` → kalau tiba-tiba melonjak jauh (misalnya dari 2s → 15s), itu tanda server kewalahan.
+   * `http_req_failed` → kalau >0% → mulai ada request gagal.
+   * `vus` stabil atau tidak → kalau turun mendadak padahal target tinggi, berarti ada drop.
+
+---
+
+⚖️ Jadi:
+
+* **Durasi lebih lama** = cocok untuk *soak test* (cek memory leak, stabilitas jangka panjang).
+* **Durasi lebih pendek + target tinggi** = cocok untuk *stress/spike test* (cari titik jebol).
+
+---
+
+Mau aku bikinkan **template k6 stress test** yang otomatis "step up" sampai server error muncul (semacam auto cari limit)?
