@@ -2,86 +2,84 @@ import * as authService from '../service/auth.service.js';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { sendLoginAlert } from '../service/sender-main.service.js';
+import { generateToken } from '../utils/token-jwt.js';
 // import client from "../config/redis.js";
 dotenv.config();
 
 export const loginUser = async (req, res, next) => {
-    try {
-        const user = await authService.loginUser(req.body.email, req.body.password)
-        req.session.userId = user.uuid;
-        const { uuid, name, email, role } = user;
-        
-        await sendLoginAlert(user.email, user.name)
+  try {
+    const user = await authService.loginUser(req.body.email, req.body.password)
+    req.session.userId = user.uuid;
+    const { uuid, name, email, role } = user;
 
-        res.status(200).json({ uuid, name, email, role })
-    } catch (error) {
-        res.status(500).json({ errors: [{ msg: error.message }] });
-    }
+    await sendLoginAlert(user.email, user.name)
+
+    res.status(200).json({ uuid, name, email, role })
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: error.message }] });
+  }
 }
 
 export const getProfile = async (req, res, next) => {
-    try {
-        if (!req.session.userId) {
-            return res.status(401).json({ msg: "Mohon login kembali" });
-        }
-
-        const user = await authService.getProfile(req.session.userId);
-        res.status(200).json(user);
-
-    } catch (error) {
-        if (error.message.includes("User")) {
-            return res.status(404).json({ errors: [{ msg: error.message }] });
-        }
-        res.status(500).json({ errors: [{ msg: error.message }] });
+  try {
+    if (!req.session.userId) {
+      return res.status(401).json({ msg: "Mohon login kembali" });
     }
+
+    const user = await authService.getProfile(req.session.userId);
+    res.status(200).json(user);
+
+  } catch (error) {
+    if (error.message.includes("User")) {
+      return res.status(404).json({ errors: [{ msg: error.message }] });
+    }
+    res.status(500).json({ errors: [{ msg: error.message }] });
+  }
 }
 
 export const Logout = (req, res) => {
-    req.session.destroy((err) => {
-        if (err) return res.status(400).json({ msg: "Tidak dapat logout" });
-        res.status(200).json({ msg: "Anda telah logout" });
-    });
+  req.session.destroy((err) => {
+    if (err) return res.status(400).json({ msg: "Tidak dapat logout" });
+    res.status(200).json({ msg: "Anda telah logout" });
+  });
 }
 
 export const loginUserJwt = async (req, res) => {
-    try {
-        const user = await authService.loginUserJwt(req.body.email, req.body.password)
+  try {
+    const user = await authService.loginUserJwt(req.body.email, req.body.password)
 
-        const token = jwt.sign(
-            { uuid: user.uuid, role: user.role },
-            process.env.SECRET_TOKEN,
-            { expiresIn: '3d' }
-        )
+    const access_token = generateToken(user);
+    const refresh_token = generateRefreshToken(user)
+    await sendLoginAlert(user.email, user.name)
 
-        await sendLoginAlert(user.email, user.name)
-        
-        res.status(200).json({
-            token_type: "Bearer",
-            expires_in: 3 * 24 * 60 * 60,
-            access_token: token,
-        })
-    } catch (error) {
-        res.status(500).json({ errors: [{ msg: error.message }] });
-    }
+    res.status(200).json({
+      token_type: "Bearer",
+      access_token: access_token,
+      refresh_token: refresh_token,
+      expires_in: 10 * 60
+    })
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: error.message }] });
+  }
 }
 
 export const getProfileJwt = async (req, res) => {
-    try {
-        const authHeader = req.headers['authorization']
-        if (!authHeader) {
-            return res.status(401).json({ msg: "Token tidak ditemukan" })
-        }
-
-        const token = authHeader.split(' ')[1]
-        const decoded = jwt.verify(token, process.env.SECRET_TOKEN)
-
-        const user = await authService.getProfileJwt(decoded.uuid)
-        console.log("dari controller: ", user);
-        
-        res.status(200).json(user)
-    } catch (error) {
-        res.status(500).json({ errors: [{ msg: error.message }] });
+  try {
+    const authHeader = req.headers['authorization']
+    if (!authHeader) {
+      return res.status(401).json({ msg: "Token tidak ditemukan" })
     }
+
+    const token = authHeader.split(' ')[1]
+    const decoded = jwt.verify(token, process.env.SECRET_TOKEN)
+
+    const user = await authService.getProfileJwt(decoded.uuid)
+    console.log("dari controller: ", user);
+
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: error.message }] });
+  }
 }
 
 export const loginWithGoogle = async (req, res) => {
@@ -100,18 +98,15 @@ export const loginWithGoogle = async (req, res) => {
       })
     }
 
-    const token = jwt.sign(
-      { uuid: user.uuid, role: user.role },
-      process.env.SECRET_TOKEN,
-      { expiresIn: '3d' }
-    )
-
+    const access_token = generateToken(user);
+    const refresh_token = generateRefreshToken(user)
     await sendLoginAlert(user.email, user.name)
 
     res.status(200).json({
       token_type: "Bearer",
-      access_token: token,
-      expires_in: 3 * 24 * 60 * 60
+      access_token: access_token,
+      refresh_token: refresh_token,
+      expires_in: 10 * 60
     })
   } catch (error) {
     res.status(500).json({ errors: [{ msg: error.message }] })
