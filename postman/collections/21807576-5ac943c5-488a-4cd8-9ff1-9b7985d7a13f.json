@@ -743,7 +743,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all?search=jaw",
+					"raw": "http://localhost:52333/api/v1/master/data/provinsi/get-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -756,12 +756,6 @@
 						"data",
 						"provinsi",
 						"get-all"
-					],
-					"query": [
-						{
-							"key": "search",
-							"value": "jaw"
-						}
 					]
 				}
 			},
