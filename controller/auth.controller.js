@@ -141,3 +141,12 @@ export const refreshToken = (req, res) => {
     return res.status(403).json({ msg: "Invalid refresh token" });
   }
 }
+
+export const logoutUserJwt = (req, res) => {
+  res.clearCookie("refresh_token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.status(200).json({ msg: "Logout berhasil" });
+};
