@@ -9,14 +9,14 @@ export const guardMiddleware = async (req, res, next) => {
         let userId = null
         let role = null
 
-        if (req.session && req.session.userId) {
-            const user = await TblUser.findOne({ where: { uuid: req.session.userId } })
-            if (!user) {
-                return res.status(404).json({ errors: [{ msg: "User tidak ditemukan" }] })
-            }
-            userId = user.uuid,
-                role = user.role
-        } else {
+        // if (req.session && req.session.userId) {
+        //     const user = await TblUser.findOne({ where: { uuid: req.session.userId } })
+        //     if (!user) {
+        //         return res.status(404).json({ errors: [{ msg: "User tidak ditemukan" }] })
+        //     }
+        //     userId = user.uuid,
+        //         role = user.role
+        // } else {
             const authHeader = req.headers['authorization']
             if (!authHeader) {
                 return res.status(401).json({ errors: [{ msg: "Mohon login kembali" }] })
@@ -39,7 +39,7 @@ export const guardMiddleware = async (req, res, next) => {
                 }
                 return res.status(403).json({ errors: [{ msg: "Token tidak valid [middleware]" }] })
             }
-        }
+        // }
         req.userId = userId
         req.role = role
         next()
