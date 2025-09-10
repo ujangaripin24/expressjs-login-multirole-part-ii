@@ -12,10 +12,6 @@ const client = createClient({
 client.on("connect", () => console.log("🔌 Redis: connecting..."));
 client.on("ready", () => console.log("✅ Redis: connected & ready!"));
 client.on("error", (err) => console.error("❌ Redis Client Error:", err));
-console.log("Redis Password: ", process.env.REDIS_USER);
-console.log("Redis Password: ", process.env.REDIS_PASSWORD);
-console.log("Redis Password: ", process.env.REDIS_HOST);
-console.log("Redis Password: ", process.env.REDIS_PORT);
 
 await client.connect();
 

@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import './config/database.js';
-import './config/redis.js'
+import './config/redis.js';
 import db from './models/index.js';
 import SequelizeStore from 'connect-session-sequelize';
 import passport from './config/passport.js';
