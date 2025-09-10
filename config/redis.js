@@ -17,6 +17,5 @@ await client.connect();
 
 await client.set("hello", "world");
 const value = await client.get("hello");
-console.log("🔎 Redis test value:", value);
 
 export default client;

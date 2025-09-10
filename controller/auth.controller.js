@@ -2,6 +2,7 @@ import * as authService from '../service/auth.service.js';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { sendLoginAlert } from '../service/sender-main.service.js';
+import client from "../config/redis.js";
 dotenv.config();
 
 export const loginUser = async (req, res, next) => {
@@ -9,7 +10,9 @@ export const loginUser = async (req, res, next) => {
         const user = await authService.loginUser(req.body.email, req.body.password)
         req.session.userId = user.uuid;
         const { uuid, name, email, role } = user;
+        
         await sendLoginAlert(user.email, user.name)
+
         res.status(200).json({ uuid, name, email, role })
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
@@ -51,6 +54,7 @@ export const loginUserJwt = async (req, res) => {
         )
 
         await sendLoginAlert(user.email, user.name)
+        
         res.status(200).json({
             token_type: "Bearer",
             expires_in: 3 * 24 * 60 * 60,

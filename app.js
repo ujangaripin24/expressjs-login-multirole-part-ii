@@ -6,6 +6,7 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import './config/database.js';
 import './config/redis.js';
+import './workers/emailWorker.js';
 import db from './models/index.js';
 import SequelizeStore from 'connect-session-sequelize';
 import passport from './config/passport.js';
