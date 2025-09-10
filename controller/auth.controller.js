@@ -2,7 +2,7 @@ import * as authService from '../service/auth.service.js';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { sendLoginAlert } from '../service/sender-main.service.js';
-import { generateToken } from '../utils/token-jwt.js';
+import { generateRefreshToken, generateToken } from '../utils/token-jwt.js';
 // import client from "../config/redis.js";
 dotenv.config();
 
