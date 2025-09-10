@@ -23,6 +23,7 @@ router.delete("/web/auth/logout", guardMiddleware, authController.Logout);
 
 router.post("/mobile/auth/login", authController.loginUserJwt);
 router.get("/mobile/auth/profile", guardMiddleware, authController.getProfileJwt);
+router.get("/mobile/auth/refresh", guardMiddleware, authController.getProfileJwt);
 
 router.post("/mobile/auth/google", authController.loginWithGoogle)
 
