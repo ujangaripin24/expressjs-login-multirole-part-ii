@@ -244,7 +244,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user002@gmaisl.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n    \"email\": \"user001@gmail.com\",\n    \"password\": \"123456789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,13 +252,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://expressjs-login-multirole-part-ii.vercel.app/api/v1/mobile/auth/login",
-					"protocol": "https",
+					"raw": "http://localhost:52333/api/v1/mobile/auth/login",
+					"protocol": "http",
 					"host": [
-						"expressjs-login-multirole-part-ii",
-						"vercel",
-						"app"
+						"localhost"
 					],
+					"port": "52333",
 					"path": [
 						"api",
 						"v1",
