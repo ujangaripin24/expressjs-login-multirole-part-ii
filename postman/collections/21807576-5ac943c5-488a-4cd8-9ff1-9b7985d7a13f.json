@@ -318,7 +318,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNjI2MTIwM2EtNjhkOC00OWZlLTkzZTUtYjQyOGVhYWU3MTE1Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTc1MTE5NTIsImV4cCI6MTc1NzUxMjU1Mn0.NxAIL2XZBDM48JMhHX4BRF81HYRDI-wb4h_nptwASog",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNjI2MTIwM2EtNjhkOC00OWZlLTkzZTUtYjQyOGVhYWU3MTE1Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTc1MTQwMzAsImV4cCI6MTc1NzUxNDYzMH0.HoedlyM1la66bzp5D23H6NTnQMQ4bUrD43h3pMIkZDw",
 							"type": "string"
 						}
 					]
@@ -335,13 +335,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://expressjs-login-multirole-part-ii.vercel.app/api/v1/mobile/auth/profile",
-					"protocol": "https",
+					"raw": "http://localhost:52333/api/v1/mobile/auth/profile",
+					"protocol": "http",
 					"host": [
-						"expressjs-login-multirole-part-ii",
-						"vercel",
-						"app"
+						"localhost"
 					],
+					"port": "52333",
 					"path": [
 						"api",
 						"v1",
