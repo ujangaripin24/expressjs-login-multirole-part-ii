@@ -860,7 +860,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/master/data/districts/3214/detail",
+					"raw": "http://localhost:52333/api/v1/master/data/districts/3214/detail?search=bandung",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -874,6 +874,12 @@
 						"districts",
 						"3214",
 						"detail"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "bandung"
+						}
 					]
 				}
 			},
@@ -943,12 +949,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:52333/api/v1/market/data/get-all?search=Cimahi&page=1&size=10&province=32&regencies=3214&districts=3214111",
-					"protocol": "http",
+					"raw": "https://expressjs-login-multirole-part-ii.vercel.app/api/v1/market/data/get-all?search=&page=1&size=10&province=31&regencies=&districts=",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"expressjs-login-multirole-part-ii",
+						"vercel",
+						"app"
 					],
-					"port": "52333",
 					"path": [
 						"api",
 						"v1",
@@ -959,7 +966,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "Cimahi"
+							"value": ""
 						},
 						{
 							"key": "page",
@@ -971,15 +978,15 @@
 						},
 						{
 							"key": "province",
-							"value": "32"
+							"value": "31"
 						},
 						{
 							"key": "regencies",
-							"value": "3214"
+							"value": ""
 						},
 						{
 							"key": "districts",
-							"value": "3214111"
+							"value": ""
 						}
 					]
 				}
